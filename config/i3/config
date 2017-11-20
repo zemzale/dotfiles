@@ -1,5 +1,6 @@
 #Setting the wallpaper
-exec feh --bg-fill /home/zemzale/media/pictures/wapeover/1491676585019.png
+exec feh --bg-center --no-xinerama /home/zemzale/media/pictures/dualscreen/anime_sniper_0.jpg
+exec --no-startup-id nm-applet
 
 #gaps settings
 for_window [class="^.*"] border pixel 0
@@ -33,11 +34,10 @@ for_window [class="PCSX2"] floating enable;
 for_window [class="PCSX2" title="PCSX2 Program Log"] floating disable;
 for_window [class="PCSX2" title="PCSX2  1.5.0-0 (git)"] floating disable;
 
-#CHROMIUM BIND
+#Custom binds
 bindsym $mod+u exec chromium;
-
-#PCMANFM
 bindsym $mod+i exec pcmanfm;
+bindsym $mod+m exec pavucontrol;
 
 #RESIZEING 
 bindsym $mod+Shift+y    resize shrink width 10 px or 10ppt
@@ -185,10 +185,14 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+bindsym $mod+x i3lock
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+	output HDMI-0
+	tray_output HDMI-0
+	tray_padding 0
         status_command i3blocks
         i3bar_command i3bar -t
         font pango:Hack 10
@@ -196,6 +200,19 @@ bar {
         separator_symbol "|"
         height 20
         colors{ 
-            background #1a1b26
+            background #202020
+        }
+}
+bar {
+	output DP-0
+	tray_output none
+        status_command i3blocks
+        i3bar_command i3bar -t
+        font pango:Hack 10
+        position top
+        separator_symbol "|"
+        height 20
+        colors{ 
+            background #202020
         }
 }
