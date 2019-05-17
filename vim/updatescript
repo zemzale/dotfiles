@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $# -gt 0 ]; then
+    if [ "$1" == "up" ]; then 
+        cp $HOME/.vim/vimrc $HOME/git/dotfiles/vim/vimrc
+        cd $HOME/git/dotfiles
+        git add vim/vimrc
+        git commit -m "Updating vimrc"
+        git push
+    fi
+fi
