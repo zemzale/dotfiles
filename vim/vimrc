@@ -2,16 +2,20 @@
 "" GENERAL 
 """""""""""""""""
 " Colorscheme
-
 set background=dark
 set t_Co=256
+
+" Shows what you are pressing 
+set showcmd 
 
 " Sets how many lines VIM has to remmber 
 set history=500
 
 " Set line endings to UNIX because mac is stuped
-
 set ff=unix
+
+autocmd InsertEnter * setlocal spell
+autocmd InsertLeave * setlocal nospell
 
 " Enable filetype plugins
 filetype plugin on
@@ -128,7 +132,7 @@ set laststatus=2
 """"""""""""""""""""""
 " EDITING MAPPING
 """"""""""""""""""""""
-map <leader><F5> call VimuxRunCommand("./service analyze")
+nnoremap <leader>s :CtrlPTag<cr>
  
 func! DeleteTrailingWS()
 " Delete trailing white spaces on save, usefull for Python and CoffeScript 
