@@ -1,21 +1,28 @@
-"""""""""""""""""
-"" GENERAL 
-"""""""""""""""""
-" Colorscheme
-set background=dark
-set t_Co=256
+"------------------------------------------------------------------------------
+" General 
+"------------------------------------------------------------------------------
 
 " Shows what you are pressing 
 set showcmd 
 
-" Sets how many lines VIM has to remmber 
+" Sets how many lines VIM has to remember 
 set history=500
 
-" Set line endings to UNIX because mac is stuped
+" Set line endings to UNIX because mac is stupid
 set ff=unix
 
+" Enable spell checker on entering insert mode
 autocmd InsertEnter * setlocal spell
 autocmd InsertLeave * setlocal nospell
+
+" Make sure that cursor is always vertically centered on j/k moves
+set so=999
+
+" add vertical lines on columns
+set colorcolumn=120
+
+" Highlight current line - allows you to track cursor position more easily
+set cursorline
 
 " Enable filetype plugins
 filetype plugin on
@@ -68,9 +75,14 @@ set showmatch
 set mat=2
 
 
-""""""""""""""""""
+"------------------------------------------------------------------------------
 " COLORS AND FONTS
-""""""""""""""""""
+"------------------------------------------------------------------------------
+
+" Set colors to dark 
+set background=dark
+set t_Co=256
+
 syntax enable
 
 " Enable 256 color pallet if Gnome 
@@ -86,25 +98,30 @@ set encoding=utf8
 " Set UNIX as the stadart filetype 
 set ffs=unix,dos,mac
 
-"""""""""""""""""""
+"------------------------------------------------------------------------------
 " FILES BACKUPS AND UNDO
-"""""""""""""""""""
+"------------------------------------------------------------------------------
 
 "Turn backup off, since most stuff is in SVN
 set nobackup 
 set nowb 
 set noswapfile
 
-""""""""""""""""""
+"------------------------------------------------------------------------------
 " TEXT, TAB, AND INDENT RELATED
-""""""""""""""""""
+"------------------------------------------------------------------------------
 " Use spaces instead of tabs 
 set expandtab
+
+" Be smart when using tabs
 set smarttab
 
-" 1tab == 4 spaces
+" 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
+
+" Round indent to multiple of 'shiftwidth' for > and < commands
+set shiftround
 
 "linebrake on 500 chars
 set lbr
@@ -116,22 +133,25 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wraplines
 
+"------------------------------------------------------------------------------
+" Visual mode related
+"------------------------------------------------------------------------------
 
-"""""""""""""""""""""
-" MOVING AROUND, TABS WIDOWS BUFFERS
-"""""""""""""""""""""
-map <leader>f /
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :call VisualSelection('f', '')<CR>
+vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
-"""""""""""""""""""""
+"------------------------------------------------------------------------------
 " STATUS LINES
-"""""""""""""""""""""
+"------------------------------------------------------------------------------
 " Always show the status line
 set laststatus=2
 
 
-""""""""""""""""""""""
+"------------------------------------------------------------------------------
 " EDITING MAPPING
-""""""""""""""""""""""
+"------------------------------------------------------------------------------
 nnoremap <leader>s :CtrlPTag<cr>
  
 func! DeleteTrailingWS()
