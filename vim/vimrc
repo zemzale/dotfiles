@@ -174,3 +174,8 @@ execute pathogen#infect()
 
 nmap <leader>n :NERDTreeToggle<CR>
 nmap <leader>g :NERDTreeFocus<CR>
+
+nmap <leader>b :make! build<CR>
+nmap <leader>t :make! test<CR>
+
+set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
