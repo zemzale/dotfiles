@@ -1,0 +1,82 @@
+#!/usr/bin/env python3 
+
+import argparse
+from pathlib import Path
+import os
+from git import Repo
+
+import shutil
+
+
+LOCAL_NVIM_PATH=Path.joinpath(Path.home(),".config/nvim/init.vim")
+REPO_NVIM_PATH=Path.joinpath(Path.cwd(),"vim/init.vim")
+LOCAL_VIM_PATH=Path.joinpath(Path.home(),".vim/vimrc")
+REPO_VIM_PATH=Path.joinpath(Path.cwd(),"vim/vimrc")
+LOCAL_SHELL_PATH=Path.joinpath(Path.home(),".zshrc")
+REPO_SHELL_PATH=Path.joinpath(Path.cwd(),".zshrc")
+
+def dump_paths():
+    print("NVIM LOCAL : {}".format(str(LOCAL_NVIM_PATH)))
+    print("NVIM REPO : {}".format(str(REPO_NVIM_PATH)))
+    print("VIM LOCAL : {}".format(str(LOCAL_VIM_PATH)))
+    print("VIM REPO : {}".format(str(REPO_VIM_PATH)))
+    print("ZSH LOCAL : {}".format(str(LOCAL_SHELL_PATH)))
+    print("ZSH REPO : {}".format(str(REPO_SHELL_PATH)))
+
+def main():
+    parser = argparse.ArgumentParser(description='A tutorial of argparse!')
+    parser.add_argument("--mode", 
+            choices=["local", "remote"],
+            default="local", type=str, help="update configs from local or remote")
+
+    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
+
+    args = parser.parse_args()
+    mode = args.mode
+    debug = args.debug
+
+    if debug:
+        print("Debug mode enabled")
+        dump_paths()
+
+
+    if mode == "local":
+        local()
+    elif mode == "remote":
+        remote()
+    else:
+        print("No mode selected, should never happen")
+
+def local():
+    print("We want to update from local configs")
+    print("nvim config preset : {}".format(LOCAL_NVIM_PATH.is_file()))
+    print("vim config preset : {}".format(LOCAL_VIM_PATH.is_file()))
+    print("zsh config preset : {}".format(LOCAL_SHELL_PATH.is_file()))
+
+    try:
+        repo = Repo(Path.cwd())
+
+        shutil.copy(LOCAL_NVIM_PATH, REPO_NVIM_PATH)
+        repo.git.add(REPO_NVIM_PATH)
+        repo.index.commit("Updated nvim config")
+
+        shutil.copy(LOCAL_VIM_PATH, REPO_VIM_PATH)
+        repo.git.add(REPO_VIM_PATH)
+        repo.index.commit("Updated vim config")
+
+        shutil.copy(LOCAL_SHELL_PATH, REPO_SHELL_PATH)
+        repo.git.add(REPO_SHELL_PATH)
+        repo.index.commit("Updated zsh config")
+
+        origin = repo.remote()
+        origin.push()
+    except:
+        print("Something went wrong")
+
+
+def remote():
+    print("We want to update from remote scripts")
+
+if __name__=="__main__":
+    main()
+
