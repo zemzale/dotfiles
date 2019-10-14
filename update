@@ -76,6 +76,12 @@ def local():
 
 def remote():
     print("We want to update from remote scripts")
+    print("nvim config preset : {}".format(LOCAL_NVIM_PATH.is_file()))
+    print("vim config preset : {}".format(LOCAL_VIM_PATH.is_file()))
+    print("zsh config preset : {}".format(LOCAL_SHELL_PATH.is_file()))
+    shutil.copy(REPO_NVIM_PATH, LOCAL_NVIM_PATH)
+    shutil.copy(REPO_VIM_PATH, LOCAL_VIM_PATH)
+    shutil.copy(REPO_SHELL_PATH, LOCAL_SHELL_PATH)
 
 if __name__=="__main__":
     main()
