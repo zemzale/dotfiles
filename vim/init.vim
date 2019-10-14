@@ -22,11 +22,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'sebdah/vim-delve'
 Plug 'fatih/vim-go'
 
-let g:deoplete#enable_at_startup = 1
+" Python
+Plug 'nvie/vim-flake8'
+
 
 call plug#end()
 
+let g:deoplete#enable_at_startup = 1
 let g:go_fmt_command = "goimports"
+autocmd BufWritePost *.py call flake8#Flake8()
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
