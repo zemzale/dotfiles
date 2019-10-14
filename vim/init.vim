@@ -5,6 +5,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 Plug 'deoplete-plugins/deoplete-jedi'
 
+
 " UI
 Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
