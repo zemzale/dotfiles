@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 #
 export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.local/bin
 
 export LC_ALL=en_US.UTF-8
 # Path to your oh-my-zsh installation.
