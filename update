@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 from git import Repo
 import shutil
+import sys
 
 
 LOCAL_NVIM_PATH = Path.joinpath(Path.home(), ".config/nvim/init.vim")
@@ -12,6 +13,25 @@ LOCAL_VIM_PATH = Path.joinpath(Path.home(), ".vim/vimrc")
 REPO_VIM_PATH = Path.joinpath(Path.cwd(), "vim/vimrc")
 LOCAL_SHELL_PATH = Path.joinpath(Path.home(), ".zshrc")
 REPO_SHELL_PATH = Path.joinpath(Path.cwd(), ".zshrc")
+
+class config:
+    def __init__(self, name, os_specifc, repo_path, local_path):
+        self.name = name
+        self.os_specifc = os_specifc
+        self.repo_path = Path.joinpath(Path.cwd(), repo_path)
+        self.local_path = Path.joinpath(Path.home(), local_path)
+
+        if self.os_specifc:
+            self.repo_path = self.repo_path.with_suffix("." + sys.platform)
+
+    def exists(self):
+        return self.local_path.is_file()
+
+    def copy_local(self):
+        shutil.copy(self.linux_path, self.repo_path)
+
+    def copy_remote(self):
+        shutil.copy(self.repo_path, self.local_path)
 
 
 def dump_paths():
@@ -38,6 +58,12 @@ def main():
             help="Enable debug mode"
             )
 
+    parser.add_argument(
+        "--dry",
+        action="store_true",
+        help="Dont push anything"
+    )
+
     args = parser.parse_args()
     mode = args.mode
     debug = args.debug
@@ -47,14 +73,14 @@ def main():
         dump_paths()
 
     if mode == "local":
-        local()
+        local(args.dry)
     elif mode == "remote":
         remote()
     else:
         print("No mode selected, should never happen")
 
 
-def local():
+def local(dry):
     print("We want to update from local configs")
     print("nvim config preset : {}".format(LOCAL_NVIM_PATH.is_file()))
     print("vim config preset : {}".format(LOCAL_VIM_PATH.is_file()))
@@ -74,8 +100,10 @@ def local():
     repo.git.add(REPO_SHELL_PATH)
     repo.index.commit("Updated zsh config")
 
-    origin = repo.remote()
-    origin.push()
+    if not dry:
+        print("pushing")
+        #origin = repo.remote()
+        #origin.push()
 
 
 def remote():
