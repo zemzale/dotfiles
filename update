@@ -4,23 +4,42 @@ import argparse
 from pathlib import Path
 from git import Repo
 import shutil
+import sys
 
 
-LOCAL_NVIM_PATH = Path.joinpath(Path.home(), ".config/nvim/init.vim")
-REPO_NVIM_PATH = Path.joinpath(Path.cwd(), "vim/init.vim")
-LOCAL_VIM_PATH = Path.joinpath(Path.home(), ".vim/vimrc")
-REPO_VIM_PATH = Path.joinpath(Path.cwd(), "vim/vimrc")
-LOCAL_SHELL_PATH = Path.joinpath(Path.home(), ".zshrc")
-REPO_SHELL_PATH = Path.joinpath(Path.cwd(), ".zshrc")
+class config:
+    def __init__(self, name, os_specifc, repo_path, local_path):
+        self.name = name
+        self.os_specifc = os_specifc
+        self.repo_path = Path.joinpath(Path.cwd(), repo_path)
+        self.local_path = Path.joinpath(Path.home(), local_path)
+
+        if self.os_specifc:
+            self.repo_path = self.repo_path.with_suffix("." + sys.platform)
+
+    def exists(self):
+        return self.local_path.is_file()
+
+    def copy_local(self):
+        shutil.copy(self.linux_path, self.repo_path)
+
+    def copy_remote(self):
+        shutil.copy(self.repo_path, self.local_path)
+
+configs = []
+configs.append(config("zsh", True, "zshrc", ".zshrc"))
+configs.append(config("vim", False, "vim/vimrc", ".vim/vimrc"))
+configs.append(config("nvim", False, "vim/init.vim", ".config/nvim/init.vim"))
 
 
 def dump_paths():
-    print("NVIM LOCAL : {}".format(str(LOCAL_NVIM_PATH)))
-    print("NVIM REPO : {}".format(str(REPO_NVIM_PATH)))
-    print("VIM LOCAL : {}".format(str(LOCAL_VIM_PATH)))
-    print("VIM REPO : {}".format(str(REPO_VIM_PATH)))
-    print("ZSH LOCAL : {}".format(str(LOCAL_SHELL_PATH)))
-    print("ZSH REPO : {}".format(str(REPO_SHELL_PATH)))
+    for conf in configs:
+        print("================")
+        print("Name : {}".format(conf.name))
+        print("local : {}".format(str(conf.local_path)))
+        print("repo : {}".format(str(conf.repo_path)))
+        print("================")
+        print()
 
 
 def main():
@@ -38,6 +57,18 @@ def main():
             help="Enable debug mode"
             )
 
+    parser.add_argument(
+        "--dry",
+        action="store_true",
+        help="Dont push anything"
+    )
+
+    parser.add_argument(
+        "--commit",
+        action="store_true",
+        help="Commit to the repo"
+    )
+
     args = parser.parse_args()
     mode = args.mode
     debug = args.debug
@@ -47,45 +78,42 @@ def main():
         dump_paths()
 
     if mode == "local":
-        local()
+        local(args.dry, args.commit)
     elif mode == "remote":
         remote()
     else:
         print("No mode selected, should never happen")
 
 
-def local():
+def local(dry, commit):
     print("We want to update from local configs")
-    print("nvim config preset : {}".format(LOCAL_NVIM_PATH.is_file()))
-    print("vim config preset : {}".format(LOCAL_VIM_PATH.is_file()))
-    print("zsh config preset : {}".format(LOCAL_SHELL_PATH.is_file()))
-
     repo = Repo(Path.cwd())
 
-    shutil.copy(LOCAL_NVIM_PATH, REPO_NVIM_PATH)
-    repo.git.add(REPO_NVIM_PATH)
-    repo.index.commit("Updated nvim config")
+    for conf in configs:
+        if not conf.exists():
+            print("{} config doesn't exist".format(conf.name))
+            continue
 
-    shutil.copy(LOCAL_VIM_PATH, REPO_VIM_PATH)
-    repo.git.add(REPO_VIM_PATH)
-    repo.index.commit("Updated vim config")
+        shutil.copy(conf.local_path, conf.repo_path)
+        repo.git.add(conf.repo_path)
+        if commit:
+            repo.index.commit("Updated {} config".format(conf.name))
+        print("Updated {} config".format(conf.name))
 
-    shutil.copy(LOCAL_SHELL_PATH, REPO_SHELL_PATH)
-    repo.git.add(REPO_SHELL_PATH)
-    repo.index.commit("Updated zsh config")
-
-    origin = repo.remote()
-    origin.push()
+    if not dry:
+        print("pushing")
+        origin = repo.remote()
+        origin.push()
 
 
 def remote():
     print("We want to update from remote scripts")
-    print("nvim config preset : {}".format(LOCAL_NVIM_PATH.is_file()))
-    print("vim config preset : {}".format(LOCAL_VIM_PATH.is_file()))
-    print("zsh config preset : {}".format(LOCAL_SHELL_PATH.is_file()))
-    shutil.copy(REPO_NVIM_PATH, LOCAL_NVIM_PATH)
-    shutil.copy(REPO_VIM_PATH, LOCAL_VIM_PATH)
-    shutil.copy(REPO_SHELL_PATH, LOCAL_SHELL_PATH)
+    for conf in configs:
+        if not conf.exist():
+            print("{} config doesn't exist".format(conf.name))
+            continue
+        shutil.copy(conf.repo_path, conf.local_path)
+        print("Updated {} config".format(conf.name))
 
 
 if __name__ == "__main__":
