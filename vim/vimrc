@@ -168,11 +168,7 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " So C tags would be picked up
 set tags=tags;/
 
-
 nmap <leader>n :NERDTreeToggle<CR>
 nmap <leader>g :NERDTreeFocus<CR>
-
-nmap <leader>b :make! build<CR>
-nmap <leader>t :make! test<CR>
 
 set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
