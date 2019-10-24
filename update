@@ -109,7 +109,7 @@ def local(dry, commit):
 def remote():
     print("We want to update from remote scripts")
     for conf in configs:
-        if not conf.exist():
+        if not conf.exists():
             print("{} config doesn't exist".format(conf.name))
             continue
         shutil.copy(conf.repo_path, conf.local_path)
