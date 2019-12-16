@@ -52,6 +52,8 @@ let g:float_preview#docked = 0
 
 let g:go_fmt_command = "goimports"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips/']
+let g:UltiSnipsExpandTrigger="<c-tab>"
+
 
 autocmd BufWritePost *.py call flake8#Flake8()
 
@@ -69,6 +71,7 @@ nnoremap <Right> :vertical resize -2<CR>
 " CtrpP mapping/setting
 nnoremap <leader>s :CtrlPTag<cr>
 nnoremap <leader>f :CtrlPLine<cr>
+nnoremap <leader>m :make up<cr>
 
 
 " Exit terminal with ESC
