@@ -1,4 +1,5 @@
-# If you come from bash you might have to change your $PATH.
+# If you come from bash you might have to change your $PATH
+#
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export LC_ALL=en_US.UTF-8
@@ -98,10 +99,12 @@ alias l="exa -lahF"
 alias ls="exa"
 alias cat="bat"
 
-
 export GOPATH=$HOME/go
-export PATH=$PATH:$HOME/go/bin 
+export PATH=$PATH:$HOME/go/bin:/usr/local/opt/llvm/bin
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+source <(kubectl completion zsh)

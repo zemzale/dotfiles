@@ -7,6 +7,9 @@ Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
+"Navigation
+Plug 'jremmen/vim-ripgrep' 
+
 " Snipets
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
@@ -38,12 +41,14 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 Plug 'junegunn/seoul256.vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'atahabaki/archman-vim'
 
 
 call plug#end()
 
-let g:seoul256_background = 234
-colo seoul256
+"let g:seoul256_background = 234
+colo jellybeans
 
 
 let g:deoplete#enable_at_startup = 1
@@ -73,6 +78,7 @@ nnoremap <leader>s :CtrlPTag<cr>
 nnoremap <leader>f :CtrlPLine<cr>
 nnoremap <leader>m :make up<cr>
 
+let g:ctrlp_match_window = 'top,order:btt,min:1,max:10,results:10'
 
 " Exit terminal with ESC
 tnoremap <Esc> <C-\><C-n>?\$<CR>
