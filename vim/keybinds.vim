@@ -17,3 +17,10 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " TODO comments 
 nnoremap <leader>t I//TODO @zemzale <ESC>"=strftime("%d/%m/%y ")<CR>pA
+
+" PHP go to defenition
+nnoremap <leader>m :PhpactorGotoDefinition<CR>
+nnoremap <leader><F2> :PhpactorImportMissingClasses<CR>
+
+" Open notes
+nnoremap <leader><C-n> :e $HOME/notes/notes<CR>

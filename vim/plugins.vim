@@ -9,6 +9,7 @@ Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'rust-lang/rust.vim'
 Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
 Plug 'kristijanhusak/deoplete-phpactor'
+Plug 'zchee/deoplete-clang'
 
 " Formating
 Plug 'editorconfig/editorconfig-vim'
@@ -65,6 +66,7 @@ Plug 'jwalton512/vim-blade'
 
 " PHP
 Plug 'stephpy/vim-php-cs-fixer'
+Plug 'vim-syntastic/syntastic'
 
 
 call plug#end()

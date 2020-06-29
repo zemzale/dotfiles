@@ -40,6 +40,7 @@ let g:fzf_layout = { 'window': { 'width': 8.0, 'height': 0.5, 'yoffset': 0.0,  }
 " <php-cs-fixer>
 let g:php_cs_fixer_rules = "@PSR2"
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
+autocmd BufWritePost *.php silent! call PhpactorImportMissingClasses()
 " </php-cs-fixer>
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
