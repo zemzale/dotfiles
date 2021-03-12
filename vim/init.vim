@@ -7,42 +7,39 @@ let g:seoul256_srgb = 1
 colo seoul256
 " </Colors>
 
-" <Deoplete>
-let g:deoplete#omni_patterns = {}
-call deoplete#custom#option('omni_patterns', {
-\ 'complete_method': 'omnifunc',
-\ 'terraform': '[^ *\t"{=$]\w*',
-\})
-let g:deoplete#enable_at_startup = 1
-call deoplete#initialize()
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" </Deoplete> 
+" <coc.nvim>
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" </coc.nvim>
 
 " <Go>
 let g:go_fmt_command = "goimports"
 " </Go>
 
+" <Dart>  
+autocmd BufRead,BufNewFile,BufEnter *.dart UltiSnipsAddFiletypes dart-flutter
+autocmd BufWrite *.dart :DartFmt
+let g:deoplete#sources#dart#dart_sdk_path = '/usr'
+" </Dart>
 
 " <Snipets>
-" let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips/']
 let g:UltiSnipsExpandTrigger="<c-h>"
 " </Snipets>
 
-" <Python>  
-autocmd BufWritePost *.py call flake8#Flake8()
-autocmd BufWrite *.py :Autoformat
-" </Python>
-
 " <fzf>
-let g:fzf_layout = { 'window': { 'width': 8.0, 'height': 0.5, 'yoffset': 0.0,  } }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.3, 'yoffset': 0.05} }
 " </fzf>
 
-" <php-cs-fixer>
-let g:php_cs_fixer_rules = "@PSR2"
-autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
-autocmd BufWritePost *.php silent! call PhpactorImportMissingClasses()
-" </php-cs-fixer>
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
-source ~/.vim/vimrc
+source ~/.config/vim/vimrc
 source ~/.config/nvim/keybinds.vim
+source ~/.config/nvim/lsp.vim

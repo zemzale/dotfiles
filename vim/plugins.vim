@@ -1,21 +1,12 @@
 call plug#begin()
 
 " Autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-Plug 'rust-lang/rust.vim'
 Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-Plug 'kristijanhusak/deoplete-phpactor'
-Plug 'zchee/deoplete-clang'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
 
 " Formating
 Plug 'editorconfig/editorconfig-vim'
-
-" Terraform
-Plug 'hashivim/vim-terraform'
 
 "Navigation
 Plug 'jremmen/vim-ripgrep' 
@@ -26,13 +17,15 @@ Plug 'honza/vim-snippets'
 
 " UI
 Plug 'vim-airline/vim-airline'
+Plug 'thiagoalessio/rainbow_levels.vim'
 Plug 'airblade/vim-gitgutter'
 
 " Navigation
-Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'ncm2/float-preview.nvim'
+Plug 'craigemery/vim-autotag'
+let g:autotagExcludeFiletypes = "json"
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Git
@@ -41,6 +34,7 @@ Plug 'tpope/vim-fugitive'
 " Go plug
 Plug 'sebdah/vim-delve'
 Plug 'fatih/vim-go'
+let g:go_gopls_settings = {'buildFlag' :'-tags=unit,integration'}
 
 " Python
 Plug 'nvie/vim-flake8'
@@ -57,16 +51,17 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'atahabaki/archman-vim'
 Plug 'flazz/vim-colorschemes'
 
-" TODOlist
-Plug 'aserebryakov/vim-todo-lists'
-
 " HTML
 Plug 'mattn/emmet-vim'
 Plug 'jwalton512/vim-blade'
 
 " PHP
-Plug 'stephpy/vim-php-cs-fixer'
 Plug 'vim-syntastic/syntastic'
+let g:syntastic_python_checkers = ['flake8']
+Plug 'vim-vdebug/vdebug'
 
+" Flutter
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
 
 call plug#end()

@@ -19,8 +19,8 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <leader>t I//TODO @zemzale <ESC>"=strftime("%d/%m/%y ")<CR>pA
 
 " PHP go to defenition
-nnoremap <leader>m :PhpactorGotoDefinition<CR>
-nnoremap <leader><F2> :PhpactorImportMissingClasses<CR>
+autocmd FileType php nnoremap <buffer> <leader><F2> :PhpactorImportMissingClasses<CR>
+autocmd FileType php nnoremap <buffer> <silent> gd :PhpactorGotoDefinition<cr>
 
-" Open notes
-nnoremap <leader><C-n> :e $HOME/notes/notes<CR>
+" Go
+autocmd FileType go nnoremap <buffer> <leader>l :GoAlternate<CR>
