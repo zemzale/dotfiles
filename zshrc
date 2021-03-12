@@ -40,16 +40,10 @@ eval $(thefuck --alias)
 alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
 unalias l
 alias l='exa -la --group-directories-first'
+alias ls='exa --group-directories-first'
 alias rmd='rm -rf'
 alias hlogs='lnav /var/log/httpd/error_log'
 
-source $HOME/.config/glab-cli/completion.zsh
-
-#=== START_BTA_ALIASES ===
-alias onedev='/home/zemzale/git/bta/devapp/venv/bin/python /home/zemzale/git/bta/devapp/app.py' source /home/zemzale/.zshrc
-alias jira='firefox --new-window https://jira.bta.lv &>/dev/null'
-alias gitlab='firefox --new-window https://gitlab.bta.lv &>/dev/null'
-#===  END_BTA_ALIASES  ===
 
 # kdesrc-build #################################################################
 
@@ -85,6 +79,4 @@ function _comp-kdesrc-run
 
 ## Register autocomplete function
 complete -o nospace -F _comp-kdesrc-run kdesrc-run
-
 ################################################################################
-
