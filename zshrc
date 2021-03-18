@@ -5,7 +5,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.local/bin:$HOME/.local/share/node/bin
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/zemzale/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # ZSH_THEME="agnoster"
 # ZSH_THEME="lambda"
@@ -25,8 +25,8 @@ export EDITOR="/usr/local/bin/nvim"
 export LC_ALL=en_US.UTF-8
 
 # fzf 
-source /home/zemzale/git/fzf/shell/key-bindings.zsh
-source /home/zemzale/git/fzf/shell/completion.zsh
+source ~/git/fzf/shell/key-bindings.zsh
+source ~/git/fzf/shell/completion.zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,vendor}"'
 
 # zsh VI mode binding
