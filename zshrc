@@ -50,4 +50,8 @@ case "$OSTYPE" in
     ;;
 esac
 
-source ~/.local/share/zsh/functions/Completion/_flutter
+
+FLUTER_COMPLETE=~/.local/share/zsh/functions/Completion/_flutter
+if [[ -f "$FLUTER_COMPLETE" ]]; then
+    source $FILE 
+fi
