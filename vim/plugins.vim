@@ -1,7 +1,6 @@
 call plug#begin()
 
 " Autocomplete
-Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
@@ -60,10 +59,8 @@ Plug 'flazz/vim-colorschemes'
 Plug 'mattn/emmet-vim'
 Plug 'jwalton512/vim-blade'
 
-" PHP
 Plug 'vim-syntastic/syntastic'
 let g:syntastic_python_checkers = ['flake8']
-Plug 'vim-vdebug/vdebug'
 
 " Flutter
 Plug 'dart-lang/dart-vim-plugin'
