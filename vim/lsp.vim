@@ -1,8 +1,6 @@
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
-
-
 lua <<EOF
 -- nvim_lsp object
 local nvim_lsp = require'lspconfig'
@@ -12,6 +10,8 @@ local on_attach = function(client)
     require'completion'.on_attach(client)
 end
 
+-- Use a loop to conveniently both setup defined servers 
+-- and map buffer local keybindings when the language server attaches
 local servers = { "clangd", "gopls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }

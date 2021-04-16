@@ -27,7 +27,7 @@ export LC_ALL=en_US.UTF-8
 # fzf 
 source ~/git/fzf/shell/key-bindings.zsh
 source ~/git/fzf/shell/completion.zsh
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,vendor}"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
 
 # zsh VI mode binding
 bindkey -v
@@ -55,3 +55,6 @@ FLUTER_COMPLETE=~/.local/share/zsh/functions/Completion/_flutter
 if [[ -f "$FLUTER_COMPLETE" ]]; then
     source $FILE 
 fi
+
+# GPG 
+export GPG_TTY=$(tty)

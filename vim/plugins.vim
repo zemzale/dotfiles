@@ -39,6 +39,10 @@ Plug 'tpope/vim-fugitive'
 " Go plug
 Plug 'sebdah/vim-delve'
 Plug 'fatih/vim-go'
+let g:go_gopls_settings = {'buildFlag' :'-tags=unit,integration'}
+let g:go_code_completion_enabled = 0
+let g:go_def_mapping_enabled = 0
+let g:go_gopls_enabled = 0
 
 " Python
 Plug 'nvie/vim-flake8'
