@@ -1,7 +1,6 @@
 call plug#begin()
 
 " Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'nvim-lua/completion-nvim'
@@ -27,7 +26,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 " Navigation
 Plug 'scrooloose/nerdtree'
-Plug 'ncm2/float-preview.nvim'
 Plug 'craigemery/vim-autotag'
 let g:autotagExcludeFiletypes = "json"
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
