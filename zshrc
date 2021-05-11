@@ -43,6 +43,7 @@ alias l='exa -la --group-directories-first'
 alias ls='exa --group-directories-first'
 alias rmd='rm -rf'
 alias hlogs='lnav /var/log/httpd/error_log'
+alias bat='bat --style=changes,header --theme=gruvbox-dark'
 
 case "$OSTYPE" in
     linux*)
