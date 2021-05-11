@@ -48,6 +48,9 @@ case "$OSTYPE" in
     linux*)
         export CHROME_EXECUTABLE=chromium
     ;;
+    darwin*)
+        export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jre/jdk/Contents/Home
+    ;;
 esac
 
 
