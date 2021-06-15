@@ -4,7 +4,8 @@ source ~/.config/nvim/plugins.vim
 set termguicolors 
 let g:seoul256_background = 233
 let g:seoul256_srgb = 1
-colo seoul256
+let g:gruvbox_contrast_dark = 'hard'
+colo gruvbox
 " </Colors>
 
 " <coc.nvim>

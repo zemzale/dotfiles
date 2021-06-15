@@ -52,6 +52,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 " Colorschemes
+Plug 'morhetz/gruvbox'
 Plug 'junegunn/seoul256.vim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'atahabaki/archman-vim'
