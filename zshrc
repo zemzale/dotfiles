@@ -58,7 +58,7 @@ esac
 
 FLUTER_COMPLETE=~/.local/share/zsh/functions/Completion/_flutter
 if [[ -f "$FLUTER_COMPLETE" ]]; then
-    source $FILE 
+    source $FLUTER_COMPLETE 
 fi
 
 # GPG 
