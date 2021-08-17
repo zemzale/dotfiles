@@ -1,6 +1,12 @@
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
+" Enable fuzzy autocomplete
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+
+" Enable ulti snips in completion 
+let g:completion_enable_snippet = 'UltiSnips'
+
 lua <<EOF
 -- nvim_lsp object
 local nvim_lsp = require'lspconfig'
@@ -12,7 +18,7 @@ end
 
 -- Use a loop to conveniently both setup defined servers 
 -- and map buffer local keybindings when the language server attaches
-local servers = { "clangd", "gopls" }
+local servers = { "clangd", "gopls", "tsserver" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end

@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.local/bin:$HOME/.local/share/node/bin
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.local/bin:$HOME/.local/share/node/bin:$HOME/git/flutter/flutter/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -20,6 +20,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export EDITOR="/usr/local/bin/nvim"
+export PAGER="bat"
 
 # Locales
 export LC_ALL=en_US.UTF-8
@@ -27,7 +28,7 @@ export LC_ALL=en_US.UTF-8
 # fzf 
 source ~/git/fzf/shell/key-bindings.zsh
 source ~/git/fzf/shell/completion.zsh
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --ignore-vcs'
 
 # zsh VI mode binding
 bindkey -v
