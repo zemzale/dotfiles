@@ -8,19 +8,6 @@ let g:gruvbox_contrast_dark = 'hard'
 colo gruvbox
 " </Colors>
 
-" <coc.nvim>
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-" </coc.nvim>
-
 " <Go>
 let g:go_code_completion_enabled = 0
 let g:go_gopls_enabled = 0
