@@ -3,7 +3,12 @@ call plug#begin()
 " Autocomplete
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
-Plug 'nvim-lua/completion-nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 
 " Editing
 Plug 'tpope/vim-surround'
@@ -17,6 +22,7 @@ Plug 'jremmen/vim-ripgrep'
 " Snipets
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 " UI
 Plug 'vim-airline/vim-airline'
