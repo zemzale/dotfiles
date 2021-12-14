@@ -14,7 +14,7 @@ ZSH_THEME="avit"
 # Display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git web-search colored-man-pages aws zsh-z golang)
+plugins=(git web-search colored-man-pages aws zsh-z golang docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
