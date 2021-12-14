@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-brew install python node golang thefuck tmux fzf exa bat rg
+brew install python node golang thefuck tmux fzf exa bat rg gh
 
 # TODO: check if this exists
 /usr/local/opt/fzf/install
