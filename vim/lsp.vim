@@ -46,11 +46,6 @@ nnoremap <silent> gW            <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd            <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> <leader>m     <cmd>lua vim.lsp.buf.rename()<CR>
 
-
-" Enable type inlay hints
-autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
-
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
