@@ -44,6 +44,7 @@ nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr>
 
 " Turn on the wild menu
+set wildmode=longest,list,full
 set wildmenu
 
 "Always show current positon
@@ -181,3 +182,4 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.config/nvim/keybinds.vim
 source ~/.config/nvim/lsp.vim
+luafile ~/.config/nvim/telescope.lua
