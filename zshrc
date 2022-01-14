@@ -14,7 +14,7 @@ ZSH_THEME="avit"
 # Display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git web-search colored-man-pages aws zsh-z golang docker docker-compose)
+plugins=(git web-search colored-man-pages aws zsh-z golang docker docker-compose zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -26,8 +26,7 @@ export PAGER="bat"
 export LC_ALL=en_US.UTF-8
 
 # fzf 
-source ~/git/fzf/shell/key-bindings.zsh
-source ~/git/fzf/shell/completion.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{.git,node_modules}"'
 
 # zsh VI mode binding
