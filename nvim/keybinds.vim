@@ -4,10 +4,6 @@ nnoremap <Down>  :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
 
-" FZF keymaps
-" nnoremap <C-p> :Files<cr>
-" nnoremap <leader>s :Tags<cr>
-" nnoremap <leader>f :BLines<cr>
 " Telescope keymaps
 nnoremap <C-p> <cmd>Telescope find_files<cr>
 nnoremap <leader>f <cmd>Telescope live_grep<cr>
@@ -23,15 +19,9 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <leader>t I//TODO @zemzale <ESC>"=strftime("%d/%m/%y ")<CR>pA
 
 " Go
-autocmd FileType go nnoremap <buffer> <leader>l :GoAlternate<CR>
-autocmd FileType go nnoremap <buffer> <leader>t :GoTest<CR>
-
-nnoremap ∆ :m .+1<CR>==
-nnoremap ˚ :m .-2<CR>==
-inoremap ∆ <Esc>:m .+1<CR>==gi
-inoremap ˚ <Esc>:m .-2<CR>==gi
-vnoremap ∆ :m '>+1<CR>gv=gv
-vnoremap ˚ :m '<-2<CR>gv=gv
+autocmd FileType go nnoremap <buffer> <leader>gl :GoAlternate<CR>
+autocmd FileType go nnoremap <buffer> <leader>gt :GoTest<CR>
+autocmd FileType go nnoremap <buffer> <leader>gf :GoTestFunc<CR>
 
 " Delete trailing white spaces on save, usefull for Python and CoffeScript 
 func! DeleteTrailingWS()
@@ -42,9 +32,9 @@ endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-" NerdTree mapings
-nmap <leader>n :NERDTreeToggle<CR>
-nmap <leader>g :NERDTreeFocus<CR>
-
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-f> :cprev<CR>
+
+nnoremap <silent><leader>a :lua require("harpoon.mark").add_file()<CR>
+nnoremap <silent><C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <silent><leader>tc :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>

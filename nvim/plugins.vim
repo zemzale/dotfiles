@@ -8,41 +8,25 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'ray-x/lsp_signature.nvim'
 
-Plug 'ThePrimeagen/refactoring.nvim'
+Plug '~/git/refactoring.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/playground'
 
 Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
-" Editing
-Plug 'tpope/vim-surround'
-
 " Formating
 Plug 'editorconfig/editorconfig-vim'
 
-"Navigation
-Plug 'jremmen/vim-ripgrep' 
-
-" Snipets
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-
-" UI
+" Better status line
 Plug 'vim-airline/vim-airline'
-Plug 'thiagoalessio/rainbow_levels.vim'
+" Small thingies that show lines changed/added/deleted by git
 Plug 'airblade/vim-gitgutter'
-Plug 'nathanaelkane/vim-indent-guides'
-
-" Navigation
-Plug 'scrooloose/nerdtree'
-Plug 'craigemery/vim-autotag'
-let g:autotagExcludeFiletypes = "json"
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plug 'junegunn/fzf.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -61,24 +45,20 @@ Plug 'Chiel92/vim-autoformat'
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/seoul256.vim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'flazz/vim-colorschemes'
+Plug 'EdenEast/nightfox.nvim'
+Plug 'mangeshrex/uwu.vim'
+Plug 'wadackel/vim-dogrun'
+Plug 'NLKNguyen/papercolor-theme'
 
 " HTML
 Plug 'mattn/emmet-vim'
-Plug 'jwalton512/vim-blade'
 
 Plug 'vim-syntastic/syntastic'
 let g:syntastic_python_checkers = ['flake8']
-
-" Flutter
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'thosakwe/vim-flutter'
-
 call plug#end()

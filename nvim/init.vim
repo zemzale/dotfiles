@@ -1,4 +1,9 @@
 "------------------------------------------------------------------------------
+" Plugins (so stuff can work) 
+"------------------------------------------------------------------------------
+source ~/.config/nvim/plugins.vim
+
+"------------------------------------------------------------------------------
 " General 
 "------------------------------------------------------------------------------
 
@@ -7,9 +12,6 @@ set showcmd
 
 " Sets how many lines VIM has to remember 
 set history=500
-
-" Set line endings to UNIX because mac is stupid
-set ff=unix
 
 " Enable spell checker on entering insert mode
 autocmd InsertEnter * setlocal spell
@@ -42,6 +44,7 @@ nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr>
 
 " Turn on the wild menu
+set wildmode=longest,list,full
 set wildmenu
 
 "Always show current positon
@@ -74,7 +77,6 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
-
 "------------------------------------------------------------------------------
 " COLORS AND FONTS
 "------------------------------------------------------------------------------
@@ -90,13 +92,21 @@ if $COLORTERM == 'gnome-terminal'
 	set t_Co=256
 endif
 
-
-
 " Set UTF8 as standart encoding and en_US as the standart language
 set encoding=utf8
 
 " Set UNIX as the stadart filetype 
 set ffs=unix,dos,mac
+
+" Set line endings to UNIX because mac is stupid
+set ff=unix
+
+set termguicolors 
+let g:seoul256_background = 233
+let g:seoul256_srgb = 1
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme PaperColor
+
 
 "------------------------------------------------------------------------------
 " FILES BACKUPS AND UNDO
@@ -128,19 +138,11 @@ set lbr
 set tw=500
 
 au BufRead /tmp/mutt-* set tw=72
+au BufRead *.md set tw=80
 
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wraplines
-
-"------------------------------------------------------------------------------
-" Visual mode related
-"------------------------------------------------------------------------------
-
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :call VisualSelection('f', '')<CR>
-vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
 "------------------------------------------------------------------------------
 " STATUS LINES
@@ -149,24 +151,22 @@ vnoremap <silent> # :call VisualSelection('b', '')<CR>
 set laststatus=2
 
 
-"------------------------------------------------------------------------------
-" EDITING MAPPING
-"------------------------------------------------------------------------------
- 
-func! DeleteTrailingWS()
-" Delete trailing white spaces on save, usefull for Python and CoffeScript 
-    exe "normal mz"
-    %s/\s\+$//ge
-    exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
 " So C tags would be picked up
-set tags=tags;/
-
-nmap <leader>n :NERDTreeToggle<CR>
-nmap <leader>g :NERDTreeFocus<CR>
-
 set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
+
+"------------------------------------------------------------------------------
+" LANGUAGE SPECIFIC
+"------------------------------------------------------------------------------
+
+" Go
+let g:go_code_completion_enabled = 0
+let g:go_gopls_enabled = 0
+let g:go_def_mapping_enabled = 0
+let g:go_fmt_command = "goimports"
+
+autocmd FileType typescriptreact setlocal shiftwidth=2
+
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+source ~/.config/nvim/keybinds.vim
+lua require("zemzale")
