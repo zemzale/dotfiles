@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.local/bin:$HOME/.local/share/node/bin:$HOME/git/flutter/flutter/bin
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.local/bin:$HOME/.local/share/node/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -53,12 +53,6 @@ case "$OSTYPE" in
         export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jre/jdk/Contents/Home
     ;;
 esac
-
-
-FLUTER_COMPLETE=~/.local/share/zsh/functions/Completion/_flutter
-if [[ -f "$FLUTER_COMPLETE" ]]; then
-    source $FLUTER_COMPLETE 
-fi
 
 # GPG 
 export GPG_TTY=$(tty)

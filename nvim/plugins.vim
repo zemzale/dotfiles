@@ -9,7 +9,13 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'ray-x/lsp_signature.nvim'
+Plug 'williamboman/nvim-lsp-installer'
+
+Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
+
 
 Plug '~/git/refactoring.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
@@ -18,10 +24,14 @@ Plug 'nvim-treesitter/playground'
 Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
+" Rust
+Plug 'simrat39/rust-tools.nvim'
 
 " Formating
 Plug 'editorconfig/editorconfig-vim'
+Plug 'sbdchd/neoformat'
 
 " Better status line
 Plug 'vim-airline/vim-airline'

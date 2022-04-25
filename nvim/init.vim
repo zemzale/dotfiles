@@ -164,7 +164,14 @@ let g:go_gopls_enabled = 0
 let g:go_def_mapping_enabled = 0
 let g:go_fmt_command = "goimports"
 
-autocmd FileType typescriptreact setlocal shiftwidth=2
+let g:neoformat_try_node_exe = 1
+autocmd FileType typescriptreact setlocal shiftwidth=2 formatprg=prettier
+autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.jsx Neoformat
+autocmd BufWritePre *.ts Neoformat
+autocmd BufWritePre *.tsx Neoformat
+autocmd BufWritePre *.rs Neoformat
+
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
