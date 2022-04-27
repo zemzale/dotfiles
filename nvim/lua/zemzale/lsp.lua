@@ -15,7 +15,7 @@ cmp.setup({
       end,
     },
     mapping = {
-        ['<Tab>'] = cmp.mapping(cmp.mapping.confirm(), { 'i', 'c' }),
+        ['<Tab>'] = cmp.mapping(cmp.mapping.confirm(), { 'i'}),
         ['<C-k>'] = cmp.mapping.select_next_item(),
         ['<C-j>'] = cmp.mapping.select_prev_item(),
         ['<C-l>'] = cmp.mapping(function(fallback)
