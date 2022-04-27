@@ -12,6 +12,7 @@ Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'williamboman/nvim-lsp-installer'
+Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
