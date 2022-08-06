@@ -66,16 +66,22 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>m', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 end
+
+local settings = {
+    gopls = {
+        buildFlags = {"-tags=e2e"}
+    }
+}
 
 require("lsp_signature").setup({})
 
 -- Use a loop to conveniently both setup defined servers 
 -- and map buffer local keybindings when the language server attaches
-local servers = { "clangd", "gopls", "tsserver", "rust_analyzer", "tailwindcss"}
+local servers = { "clangd", "gopls", "tsserver", "rust_analyzer", "tailwindcss", "eslint", "gdscript"}
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach, capabilities = capabilities }
+  nvim_lsp[lsp].setup { on_attach = on_attach, capabilities = capabilities, settings = settings }
 end
 
 -- Enable diagnostics
