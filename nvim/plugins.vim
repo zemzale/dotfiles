@@ -28,11 +28,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
-" Rust
-Plug 'simrat39/rust-tools.nvim'
-
-" Formating
-Plug 'editorconfig/editorconfig-vim'
 Plug 'sbdchd/neoformat'
 
 " Better status line
@@ -60,9 +55,4 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 " Colorschemes
 Plug 'morhetz/gruvbox'
 
-" HTML
-Plug 'mattn/emmet-vim'
-
-Plug 'vim-syntastic/syntastic'
-let g:syntastic_python_checkers = ['flake8']
 call plug#end()
