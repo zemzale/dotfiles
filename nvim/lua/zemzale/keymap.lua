@@ -24,12 +24,32 @@ local n_keybinds = {
     {"<leader>s", telescope.lsp_document_symbols, { noremap = true }},
     {"<C-j>", ":cnext<CR>", {}},
     {"<C-f>", ":cprev<CR>", {}},
-
 }
 
 for _, m in ipairs(n_keybinds) do 
     M.nmap(m)
 end
+
+local api = vim.api
+
+local go_keybinds = {
+    {"<leader>gl", ":GoAlternate<CR>", { noremap = true }},
+    {"<leader>gt", ":GoTest<CR>", { noremap = true }},
+    {"<leader>gf", ":GoTestFunc<CR>", { noremap = true }},
+}
+
+api.nvim_create_autocmd(
+    "FileType",
+    { 
+        pattern = { "go" },
+        callback = function() 
+            for _, m in ipairs(go_keybinds) do 
+                M.nmap(m)
+            end
+        end
+    }
+)
+
 
 return M
 
