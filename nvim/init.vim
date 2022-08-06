@@ -102,10 +102,8 @@ set ffs=unix,dos,mac
 set ff=unix
 
 set termguicolors 
-let g:seoul256_background = 233
-let g:seoul256_srgb = 1
 let g:gruvbox_contrast_dark = 'hard'
-colorscheme PaperColor
+colorscheme gruvbox
 
 
 "------------------------------------------------------------------------------
@@ -164,13 +162,7 @@ let g:go_gopls_enabled = 0
 let g:go_def_mapping_enabled = 0
 let g:go_fmt_command = "goimports"
 
-let g:neoformat_try_node_exe = 1
-autocmd FileType typescriptreact setlocal shiftwidth=2 formatprg=prettier
-autocmd BufWritePre *.js Neoformat
-autocmd BufWritePre *.jsx Neoformat
-autocmd BufWritePre *.ts Neoformat
-autocmd BufWritePre *.tsx Neoformat
-autocmd BufWritePre *.rs Neoformat
+"autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
 
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
