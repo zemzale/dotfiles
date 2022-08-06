@@ -167,5 +167,4 @@ let g:go_fmt_command = "goimports"
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
-source ~/.config/nvim/keybinds.vim
 lua require("zemzale")
