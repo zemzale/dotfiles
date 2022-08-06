@@ -1,6 +1,6 @@
 ci: pipeline ci
 co: mr checkout
-mrc: mr create -a=@me --remove-source-branch --push --reviewer=eriks.vitolins
+mrc: mr create -a=@me --remove-source-branch --push --reviewer=einars.n.galejs
 iml: issue list -a @me -l "Working On"
 imtl: issue list -a @me -l "To do"
 iu-todo: issue update $1 -l "To do" -u "Working On" -u "In Review" -u "Testing"
