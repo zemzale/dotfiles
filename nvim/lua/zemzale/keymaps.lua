@@ -26,10 +26,20 @@ local n_keybinds = {
     { "<leader>s", builtin.lsp_document_symbols, { noremap = true } },
     { "<C-j>", ":cnext<CR>", {} },
     { "<C-f>", ":cprev<CR>", {} },
+    { "<leader>m", vim.lsp.buf.rename, { noremap = true } },
+    { "<leader>ca", vim.lsp.buf.code_action, { noremap = true } },
+}
+
+local v_keybinds = {
+    { "<leader>y", '"*y', { noremap = true } },
 }
 
 for _, m in ipairs(n_keybinds) do
     M.nmap(m)
+end
+
+for _, m in ipairs(v_keybinds) do
+    M.vmap(m)
 end
 
 local go_keybinds = {
