@@ -16,6 +16,14 @@ vim.api.nvim_create_autocmd("BufWrite", {
     pattern = { "*" },
     callback = function()
         print("FOOORMAT")
-        vim.lsp.buf.format({ async = true })
+        vim.lsp.buf.format({ async = false })
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("zemzale.ts", { clear = true }),
+    pattern = { "typescriptreact" },
+    callback = function()
+        vim.g.compiler = "tsc"
     end,
 })

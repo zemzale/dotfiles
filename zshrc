@@ -1,15 +1,16 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+eval "$(starship init zsh)"
 
 export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.local/bin:$HOME/.local/share/node/bin
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.local/bin:$HOME/.local/share/node/bin:$HOME/Library/Python/3.11/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # ZSH_THEME="agnoster"
 # ZSH_THEME="lambda"
-ZSH_THEME="avit"
+# ZSH_THEME="avit"
 
 # Display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -44,6 +45,7 @@ alias ls='exa --group-directories-first'
 alias rmd='rm -rf'
 alias hlogs='lnav /var/log/httpd/error_log'
 alias bat='bat --style=changes,header --theme=gruvbox-dark'
+alias cat='bat'
 
 case "$OSTYPE" in
     linux*)

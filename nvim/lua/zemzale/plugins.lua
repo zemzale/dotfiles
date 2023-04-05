@@ -5,8 +5,11 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         requires = {
             { 'nvim-lua/plenary.nvim' },
-            { 'nvim-telescope/telescope-fzf-native.nvim',
-                run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                run =
+                'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+            },
             { 'kyazdani42/nvim-web-devicons' }
         }
 
@@ -64,5 +67,8 @@ return require('packer').startup(function(use)
         'fatih/vim-go',
         config = function()
         end
+    }
+    use {
+        "github/copilot.vim"
     }
 end)

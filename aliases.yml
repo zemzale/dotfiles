@@ -9,3 +9,4 @@ iu-review: issue update $1 -u "To do" -u "Working On" -l "In Review" -u "Testing
 iu-testing: issue update $1 -u "To do" -u "Working On" -u "In Review" -l "Testing"
 mrb: mr view --web
 mrbb: mr view --web
+rw: repo view -w
