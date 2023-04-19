@@ -1,33 +1,37 @@
 local lsp = require("lsp-zero").preset({})
 
 lsp.on_attach(function(client, bufnr)
-	lsp.default_keymaps({ buffer = bufnr })
+    lsp.default_keymaps({ buffer = bufnr })
 end)
 
 lsp.setup({
-	sources = {
-		{ name = "path" },
-		{ name = "nvim_lsp", keyword_length = 1 },
-		{ name = "buffer", keyword_length = 3 },
-		{ name = "luasnip", keyword_length = 2 },
-		{ name = "nvim_lua" },
-	},
+    sources = {
+        { name = "path" },
+        { name = "nvim_lsp", keyword_length = 1 },
+        { name = "buffer",   keyword_length = 3 },
+        { name = "luasnip",  keyword_length = 2 },
+        { name = "nvim_lua" },
+    },
 })
 
-local null_ls = require("null-ls")
+local cmp = require("cmp")
 
-null_ls.setup({
-	sources = {
-		-- Here you can add tools not supported by mason.nvim
-	},
+cmp.setup({
+    mapping = {
+        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+    },
 })
 
--- See mason-null-ls.nvim's documentation for more details:
--- https://github.com/jay-babu/mason-null-ls.nvim#setup
+require("mason").setup()
 require("mason-null-ls").setup({
-	ensure_installed = nil,
-	automatic_installation = false, -- You can still set this to `true`
-	handlers = {
-		-- You can add custom handlers here
-	},
+    ensure_installed = {
+        -- Opt to list sources here, when available in mason.
+    },
+    automatic_installation = false,
+    handlers = {},
+})
+require("null-ls").setup({
+    sources = {
+        -- Anything not supported by mason.
+    }
 })

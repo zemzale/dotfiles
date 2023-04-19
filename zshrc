@@ -27,7 +27,7 @@ export PAGER="bat"
 export LC_ALL=en_US.UTF-8
 
 # fzf 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.config/fzf/fzf.zsh ] && source ~/.config/fzf/fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{.git,node_modules}"'
 
 # zsh VI mode binding
