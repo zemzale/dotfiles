@@ -1,27 +1,27 @@
-# fish completion for glab                                 -*- shell-script -*-
+# fish completion for gocli                                -*- shell-script -*-
 
-function __glab_debug
+function __gocli_debug
     set -l file "$BASH_COMP_DEBUG_FILE"
     if test -n "$file"
         echo "$argv" >> $file
     end
 end
 
-function __glab_perform_completion
-    __glab_debug "Starting __glab_perform_completion"
+function __gocli_perform_completion
+    __gocli_debug "Starting __gocli_perform_completion"
 
     # Extract all args except the last one
     set -l args (commandline -opc)
     # Extract the last arg and escape it in case it is a space
     set -l lastArg (string escape -- (commandline -ct))
 
-    __glab_debug "args: $args"
-    __glab_debug "last arg: $lastArg"
+    __gocli_debug "args: $args"
+    __gocli_debug "last arg: $lastArg"
 
     # Disable ActiveHelp which is not supported for fish shell
-    set -l requestComp "GLAB_ACTIVE_HELP=0 $args[1] __complete $args[2..-1] $lastArg"
+    set -l requestComp "GOCLI_ACTIVE_HELP=0 $args[1] __complete $args[2..-1] $lastArg"
 
-    __glab_debug "Calling $requestComp"
+    __gocli_debug "Calling $requestComp"
     set -l results (eval $requestComp 2> /dev/null)
 
     # Some programs may output extra empty lines after the directive.
@@ -44,9 +44,9 @@ function __glab_perform_completion
     # completions must be prefixed with the flag
     set -l flagPrefix (string match -r -- '-.*=' "$lastArg")
 
-    __glab_debug "Comps: $comps"
-    __glab_debug "DirectiveLine: $directiveLine"
-    __glab_debug "flagPrefix: $flagPrefix"
+    __gocli_debug "Comps: $comps"
+    __gocli_debug "DirectiveLine: $directiveLine"
+    __gocli_debug "flagPrefix: $flagPrefix"
 
     for comp in $comps
         printf "%s%s\n" "$flagPrefix" "$comp"
@@ -55,84 +55,84 @@ function __glab_perform_completion
     printf "%s\n" "$directiveLine"
 end
 
-# this function limits calls to __glab_perform_completion, by caching the result behind $__glab_perform_completion_once_result
-function __glab_perform_completion_once
-    __glab_debug "Starting __glab_perform_completion_once"
+# this function limits calls to __gocli_perform_completion, by caching the result behind $__gocli_perform_completion_once_result
+function __gocli_perform_completion_once
+    __gocli_debug "Starting __gocli_perform_completion_once"
 
-    if test -n "$__glab_perform_completion_once_result"
-        __glab_debug "Seems like a valid result already exists, skipping __glab_perform_completion"
+    if test -n "$__gocli_perform_completion_once_result"
+        __gocli_debug "Seems like a valid result already exists, skipping __gocli_perform_completion"
         return 0
     end
 
-    set --global __glab_perform_completion_once_result (__glab_perform_completion)
-    if test -z "$__glab_perform_completion_once_result"
-        __glab_debug "No completions, probably due to a failure"
+    set --global __gocli_perform_completion_once_result (__gocli_perform_completion)
+    if test -z "$__gocli_perform_completion_once_result"
+        __gocli_debug "No completions, probably due to a failure"
         return 1
     end
 
-    __glab_debug "Performed completions and set __glab_perform_completion_once_result"
+    __gocli_debug "Performed completions and set __gocli_perform_completion_once_result"
     return 0
 end
 
-# this function is used to clear the $__glab_perform_completion_once_result variable after completions are run
-function __glab_clear_perform_completion_once_result
-    __glab_debug ""
-    __glab_debug "========= clearing previously set __glab_perform_completion_once_result variable =========="
-    set --erase __glab_perform_completion_once_result
-    __glab_debug "Succesfully erased the variable __glab_perform_completion_once_result"
+# this function is used to clear the $__gocli_perform_completion_once_result variable after completions are run
+function __gocli_clear_perform_completion_once_result
+    __gocli_debug ""
+    __gocli_debug "========= clearing previously set __gocli_perform_completion_once_result variable =========="
+    set --erase __gocli_perform_completion_once_result
+    __gocli_debug "Succesfully erased the variable __gocli_perform_completion_once_result"
 end
 
-function __glab_requires_order_preservation
-    __glab_debug ""
-    __glab_debug "========= checking if order preservation is required =========="
+function __gocli_requires_order_preservation
+    __gocli_debug ""
+    __gocli_debug "========= checking if order preservation is required =========="
 
-    __glab_perform_completion_once
-    if test -z "$__glab_perform_completion_once_result"
-        __glab_debug "Error determining if order preservation is required"
+    __gocli_perform_completion_once
+    if test -z "$__gocli_perform_completion_once_result"
+        __gocli_debug "Error determining if order preservation is required"
         return 1
     end
 
-    set -l directive (string sub --start 2 $__glab_perform_completion_once_result[-1])
-    __glab_debug "Directive is: $directive"
+    set -l directive (string sub --start 2 $__gocli_perform_completion_once_result[-1])
+    __gocli_debug "Directive is: $directive"
 
     set -l shellCompDirectiveKeepOrder 32
     set -l keeporder (math (math --scale 0 $directive / $shellCompDirectiveKeepOrder) % 2)
-    __glab_debug "Keeporder is: $keeporder"
+    __gocli_debug "Keeporder is: $keeporder"
 
     if test $keeporder -ne 0
-        __glab_debug "This does require order preservation"
+        __gocli_debug "This does require order preservation"
         return 0
     end
 
-    __glab_debug "This doesn't require order preservation"
+    __gocli_debug "This doesn't require order preservation"
     return 1
 end
 
 
 # This function does two things:
-# - Obtain the completions and store them in the global __glab_comp_results
+# - Obtain the completions and store them in the global __gocli_comp_results
 # - Return false if file completion should be performed
-function __glab_prepare_completions
-    __glab_debug ""
-    __glab_debug "========= starting completion logic =========="
+function __gocli_prepare_completions
+    __gocli_debug ""
+    __gocli_debug "========= starting completion logic =========="
 
     # Start fresh
-    set --erase __glab_comp_results
+    set --erase __gocli_comp_results
 
-    __glab_perform_completion_once
-    __glab_debug "Completion results: $__glab_perform_completion_once_result"
+    __gocli_perform_completion_once
+    __gocli_debug "Completion results: $__gocli_perform_completion_once_result"
 
-    if test -z "$__glab_perform_completion_once_result"
-        __glab_debug "No completion, probably due to a failure"
+    if test -z "$__gocli_perform_completion_once_result"
+        __gocli_debug "No completion, probably due to a failure"
         # Might as well do file completion, in case it helps
         return 1
     end
 
-    set -l directive (string sub --start 2 $__glab_perform_completion_once_result[-1])
-    set --global __glab_comp_results $__glab_perform_completion_once_result[1..-2]
+    set -l directive (string sub --start 2 $__gocli_perform_completion_once_result[-1])
+    set --global __gocli_comp_results $__gocli_perform_completion_once_result[1..-2]
 
-    __glab_debug "Completions are: $__glab_comp_results"
-    __glab_debug "Directive is: $directive"
+    __gocli_debug "Completions are: $__gocli_comp_results"
+    __gocli_debug "Directive is: $directive"
 
     set -l shellCompDirectiveError 1
     set -l shellCompDirectiveNoSpace 2
@@ -146,7 +146,7 @@ function __glab_prepare_completions
 
     set -l compErr (math (math --scale 0 $directive / $shellCompDirectiveError) % 2)
     if test $compErr -eq 1
-        __glab_debug "Received error directive: aborting."
+        __gocli_debug "Received error directive: aborting."
         # Might as well do file completion, in case it helps
         return 1
     end
@@ -154,7 +154,7 @@ function __glab_prepare_completions
     set -l filefilter (math (math --scale 0 $directive / $shellCompDirectiveFilterFileExt) % 2)
     set -l dirfilter (math (math --scale 0 $directive / $shellCompDirectiveFilterDirs) % 2)
     if test $filefilter -eq 1; or test $dirfilter -eq 1
-        __glab_debug "File extension filtering or directory filtering not supported"
+        __gocli_debug "File extension filtering or directory filtering not supported"
         # Do full file completion instead
         return 1
     end
@@ -162,7 +162,7 @@ function __glab_prepare_completions
     set -l nospace (math (math --scale 0 $directive / $shellCompDirectiveNoSpace) % 2)
     set -l nofiles (math (math --scale 0 $directive / $shellCompDirectiveNoFileComp) % 2)
 
-    __glab_debug "nospace: $nospace, nofiles: $nofiles"
+    __gocli_debug "nospace: $nospace, nofiles: $nofiles"
 
     # If we want to prevent a space, or if file completion is NOT disabled,
     # we need to count the number of valid completions.
@@ -171,22 +171,22 @@ function __glab_prepare_completions
     # criteria than the prefix.
     if test $nospace -ne 0; or test $nofiles -eq 0
         set -l prefix (commandline -t | string escape --style=regex)
-        __glab_debug "prefix: $prefix"
+        __gocli_debug "prefix: $prefix"
 
-        set -l completions (string match -r -- "^$prefix.*" $__glab_comp_results)
-        set --global __glab_comp_results $completions
-        __glab_debug "Filtered completions are: $__glab_comp_results"
+        set -l completions (string match -r -- "^$prefix.*" $__gocli_comp_results)
+        set --global __gocli_comp_results $completions
+        __gocli_debug "Filtered completions are: $__gocli_comp_results"
 
         # Important not to quote the variable for count to work
-        set -l numComps (count $__glab_comp_results)
-        __glab_debug "numComps: $numComps"
+        set -l numComps (count $__gocli_comp_results)
+        __gocli_debug "numComps: $numComps"
 
         if test $numComps -eq 1; and test $nospace -ne 0
             # We must first split on \t to get rid of the descriptions to be
             # able to check what the actual completion will be.
             # We don't need descriptions anyway since there is only a single
             # real completion which the shell will expand immediately.
-            set -l split (string split --max 1 \t $__glab_comp_results[1])
+            set -l split (string split --max 1 \t $__gocli_comp_results[1])
 
             # Fish won't add a space if the completion ends with any
             # of the following characters: @=/:.,
@@ -194,16 +194,16 @@ function __glab_prepare_completions
             if not string match -r -q "[@=/:.,]" -- "$lastChar"
                 # In other cases, to support the "nospace" directive we trick the shell
                 # by outputting an extra, longer completion.
-                __glab_debug "Adding second completion to perform nospace directive"
-                set --global __glab_comp_results $split[1] $split[1].
-                __glab_debug "Completions are now: $__glab_comp_results"
+                __gocli_debug "Adding second completion to perform nospace directive"
+                set --global __gocli_comp_results $split[1] $split[1].
+                __gocli_debug "Completions are now: $__gocli_comp_results"
             end
         end
 
         if test $numComps -eq 0; and test $nofiles -eq 0
             # To be consistent with bash and zsh, we only trigger file
             # completion when there are no other completions
-            __glab_debug "Requesting file completion"
+            __gocli_debug "Requesting file completion"
             return 1
         end
     end
@@ -215,21 +215,21 @@ end
 # so we can properly delete any completions provided by another script.
 # Only do this if the program can be found, or else fish may print some errors; besides,
 # the existing completions will only be loaded if the program can be found.
-if type -q "glab"
+if type -q "gocli"
     # The space after the program name is essential to trigger completion for the program
     # and not completion of the program name itself.
     # Also, we use '> /dev/null 2>&1' since '&>' is not supported in older versions of fish.
-    complete --do-complete "glab " > /dev/null 2>&1
+    complete --do-complete "gocli " > /dev/null 2>&1
 end
 
 # Remove any pre-existing completions for the program since we will be handling all of them.
-complete -c glab -e
+complete -c gocli -e
 
-# this will get called after the two calls below and clear the $__glab_perform_completion_once_result global
-complete -c glab -n '__glab_clear_perform_completion_once_result'
-# The call to __glab_prepare_completions will setup __glab_comp_results
+# this will get called after the two calls below and clear the $__gocli_perform_completion_once_result global
+complete -c gocli -n '__gocli_clear_perform_completion_once_result'
+# The call to __gocli_prepare_completions will setup __gocli_comp_results
 # which provides the program's completion choices.
 # If this doesn't require order preservation, we don't use the -k flag
-complete -c glab -n 'not __glab_requires_order_preservation && __glab_prepare_completions' -f -a '$__glab_comp_results'
+complete -c gocli -n 'not __gocli_requires_order_preservation && __gocli_prepare_completions' -f -a '$__gocli_comp_results'
 # otherwise we use the -k flag
-complete -k -c glab -n '__glab_requires_order_preservation && __glab_prepare_completions' -f -a '$__glab_comp_results'
+complete -k -c gocli -n '__gocli_requires_order_preservation && __gocli_prepare_completions' -f -a '$__gocli_comp_results'

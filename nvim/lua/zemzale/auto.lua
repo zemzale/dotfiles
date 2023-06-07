@@ -9,14 +9,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-local format_group = vim.api.nvim_create_augroup("zemzale.format", { clear = true }),
-
+local format_group = vim.api.nvim_create_augroup("zemzale.format", { clear = true })
 vim.api.nvim_create_autocmd("BufWrite", {
 	group = format_group,
 	pattern = { "*" },
-	callback = function() 
-        vim.lsp.buf.format({sync = true, timeout = 2000});
-    end,
+	callback = function()
+		vim.lsp.buf.format({ sync = true, timeout = 2000 })
+	end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {

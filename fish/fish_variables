@@ -35,4 +35,5 @@ SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
 SETUVAR fish_user_paths:/Users/albertszemzale/Library/Python/3\x2e11/bin\x1e/Users/albertszemzale/\x2ecargo/bin\x1e/usr/local/go/bin\x1e/Users/albertszemzale/go/bin\x1e/Users/albertszemzale/\x2elocal/bin\x1e/usr/local/opt/fzf/bin
 SETUVAR nvm_data:/Users/albertszemzale/\x2elocal/share/nvm
+SETUVAR nvm_default_version:v19\x2e9\x2e0
 SETUVAR nvm_mirror:https\x3a//nodejs\x2eorg/dist

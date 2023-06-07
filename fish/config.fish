@@ -32,9 +32,15 @@ if status is-interactive
     alias gc!! "git commit --amend --no-edit"
     alias gcf "git commit --fixup"
     alias grb "git rebase --interactive --autostash --autosquash"
-    alias grc "git rebase --continue"
-    alias gra "git rebase --abort"
+    alias grbc "git rebase --continue"
+    alias grba "git rebase --abort"
     alias glo "git log --oneline --decorate"
     alias gp "git push"
     alias gpf "git push --force-with-lease"
+    alias gm "git merge"
+    alias ga "git add --patch"
+    alias gf "git fetch --all"
+    alias g "git"
+
+    set --universal nvm_default_version v19.9.0
 end
