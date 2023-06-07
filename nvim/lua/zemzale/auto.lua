@@ -34,3 +34,15 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.g.wrap = true
 	end,
 })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = vim.api.nvim_create_augroup("zemzale.task", { clear = true }),
+	pattern = { "*" },
+	callback = function()
+		local scan = require("plenary.scandir")
+		local files = scan.scan_dir(".", { hidden = false, depth = 1, search_pattern = "Taskfile.*" })
+		if #files > 0 then
+			vim.o.makeprg = "task"
+		end
+	end,
+})
