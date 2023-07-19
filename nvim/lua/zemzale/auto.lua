@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("zemzale.md", { clear = true }),
-	pattern = { "markdown" },
+	pattern = { "markdown", "gitcommit" },
 	callback = function()
 		vim.g.textwidth = 80
 		vim.g.wrap = true
