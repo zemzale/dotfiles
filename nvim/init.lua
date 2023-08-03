@@ -1,6 +1,6 @@
 vim.o.relativenumber = true
 vim.o.so = 999
-vim.o.colorcolumn = 120
+vim.o.colorcolumn = "120"
 vim.o.cursorline = true
 vim.o.ruler = true
 vim.o.number = true
