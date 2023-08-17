@@ -42,6 +42,8 @@ if status is-interactive
     alias gf "git fetch --all"
     alias g "git"
 
+    alias yeet "git add --patch && git commit --amend --no-edit && git push --force-with-lease"
+
     alias goread "goread --urls_path ~/.config/goread/urls.yml"
 
     set --universal nvm_default_version v19.9.0
