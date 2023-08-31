@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+tmux new-window -n "MANPAGE" man $1

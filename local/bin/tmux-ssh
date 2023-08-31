@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+TARGET=$(cat ~/.ssh/config | grep "Host " | cut -d" " -f2 | fzf)
+tmux new-window -n 'SSH' ssh $TARGET

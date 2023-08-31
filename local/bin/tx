@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+TARGET=$(ls ~/.local/bin | grep "tmux-" | fzf)
+
+$TARGET

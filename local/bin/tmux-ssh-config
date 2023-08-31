@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+tmux new-window -n 'SSH-CONFIG' nvim ~/.ssh/config

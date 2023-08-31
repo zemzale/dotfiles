@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+glab mr list | fzf --preview 'glab mr view {1}' --preview-window down | awk '{print $1}' | xargs glab mr checkout --track

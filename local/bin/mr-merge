@@ -1,0 +1,9 @@
+#!/usr/bin/env fish
+
+set branch $argv[1]
+
+echo Merging MR $branch
+git merge $branch
+git push 
+git push origin --delete $branch
+git branch --delete $branch

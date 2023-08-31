@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+todoist tasks list --raw true | cut -d',' -f 1 | fzf --preview 'todoist tasks view {1}' --preview-window down | awk '{print $1}' | xargs todoist tasks done 
