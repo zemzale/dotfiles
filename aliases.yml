@@ -1,12 +1,5 @@
 ci: pipeline ci
 co: mr checkout
 mrc: mr create -a=@me --remove-source-branch --push
-iml: issue list -a @me -l "Working On"
-imtl: issue list -a @me -l "To do"
-iu-todo: issue update $1 -l "To do" -u "Working On" -u "In Review" -u "Testing"
-iu-working: issue update $1 -u "To do" -l "Working On" -u "In Review" -u "Testing"
-iu-review: issue update $1 -u "To do" -u "Working On" -l "In Review" -u "Testing"
-iu-testing: issue update $1 -u "To do" -u "Working On" -u "In Review" -l "Testing"
 mrb: mr view --web
-mrbb: mr view --web
 rw: repo view -w
