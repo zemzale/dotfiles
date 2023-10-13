@@ -1,0 +1,4 @@
+#!/usr/bin/env fish
+
+
+git branch | grep -v "*" | fzf --layout reverse --preview 'git show --shortstat {1}' | awk '{print $1}' | xargs git switch

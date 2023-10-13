@@ -1,0 +1,3 @@
+#!/usr/bin/env fish
+
+tmux new-window -n 'htop' htop

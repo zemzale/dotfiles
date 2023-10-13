@@ -1,0 +1,15 @@
+#!/usr/bin/env fish
+
+function info
+    printf "[ ] %s\n" $argv
+end
+
+info "Switching to main branch"
+git switch main
+info "Pulling latest changes"
+git pull
+info "Cleaning up merged branches"
+git branch --merged | grep -v "\*" | grep -v main | xargs -n 1 git branch -d
+info "Cleaning up remote branches"
+git remote prune origin
+

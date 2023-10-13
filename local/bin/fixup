@@ -1,0 +1,11 @@
+#!/usr/bin/env fish
+
+
+set commit_sha (git log --oneline | fzf --layout reverse --preview 'git show {1}' | awk '{print $1}')
+set files (git status | grep "Changes not staged for commit")
+
+if test files != ""
+    gum confirm "You have uncommited changes. Do you want to commit them?" && git add --patch .
+end
+
+git commit --fixup $commit_sha
