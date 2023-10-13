@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-TYPE=$(echo "fix feat docs style refactor test chore revert" | tr ' ' '\n' | fzf) 
+TYPE=$(echo "fix feat docs style refactor test chore revert" | tr ' ' '\n' | fzf --layout reverse) 
 SCOPE=$(gum input --placeholder "scope")
 
 # Since the scope is optional, wrap it in parentheses if it has a value.

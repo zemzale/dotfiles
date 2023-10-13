@@ -2,8 +2,9 @@
 
 if [[ $# -eq 1 ]]; then
 	selected=$1
+    mkdir -p $selected
 else
-	selected=$(find ~/git ~/git/personal ~/git/viqubox ~/git/tempero ~/git/games -mindepth 1 -maxdepth 1 -type d | fzf)
+	selected=$(find ~/git ~/git/personal -mindepth 1 -maxdepth 1 -type d | fzf --layout reverse)
 fi
 
 if [[ -z $selected ]]; then

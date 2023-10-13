@@ -1,3 +1,0 @@
-#!/usr/bin/env zsh
-
-tmux new-window -n 'TODIST' "todoist tasks list && read -s -k '?Press any key to continue.'"

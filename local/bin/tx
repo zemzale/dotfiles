@@ -1,5 +1,5 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env fish
 
-TARGET=$(ls ~/.local/bin | grep "tmux-" | fzf)
+set TARGET (ls ~/.local/bin | grep "tmux-" | fzf --layout reverse)
 
 $TARGET

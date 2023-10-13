@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env fish
 
-TARGET=$(cat ~/.ssh/config | grep "Host " | cut -d" " -f2 | fzf)
+TARGET=$(cat ~/.ssh/config | grep "Host " | cut -d" " -f2 | fzf --layout reverse)
 tmux new-window -n 'SSH' ssh $TARGET

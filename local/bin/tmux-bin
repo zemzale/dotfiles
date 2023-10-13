@@ -1,4 +1,0 @@
-#!/usr/bin/env zsh
-
-TARGET="$HOME/.local/bin"
-tmux new-window -n 'DOT' -c $TARGET nvim .
