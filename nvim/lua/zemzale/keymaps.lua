@@ -15,21 +15,23 @@ end
 vim.g.mapleader = " "
 local builtin = require("telescope.builtin")
 local n_keybinds = {
-    { "<leader>w",  ":write<CR>",                 { noremap = true } },
-    { "<leader>q",  ":q!<CR>",                    { noremap = true } },
-    { "<Up>",       ":resize +2<CR>",             { noremap = true } },
-    { "<Down>",     ":resize -2<CR>",             { noremap = true } },
-    { "<Left>",     ":vertical resize +2<CR>",    { noremap = true } },
-    { "<Right>",    ":vertical resize -2<CR>",    { noremap = true } },
-    { "<C-p>",      builtin.find_files,           { noremap = true } },
-    { "<leader>f",  builtin.live_grep,            { noremap = true } },
-    { "<leader>s",  builtin.lsp_document_symbols, { noremap = true } },
-    { "<C-j>",      ":cnext<CR>",                 {} },
-    { "<C-f>",      ":cprev<CR>",                 {} },
-    { "<leader>m",  vim.lsp.buf.rename,           { noremap = true } },
-    { "<leader>ca", vim.lsp.buf.code_action,      { noremap = true } },
-    { "<leader>x",  ":make<CR>",                  { noremap = true } },
-    { "<leader>X",  ":make",                      { noremap = true } },
+    { "<leader>w",  ":write<CR>",                           { noremap = true } },
+    { "<leader>q",  ":q!<CR>",                              { noremap = true } },
+    { "<Up>",       ":resize +2<CR>",                       { noremap = true } },
+    { "<Down>",     ":resize -2<CR>",                       { noremap = true } },
+    { "<Left>",     ":vertical resize +2<CR>",              { noremap = true } },
+    { "<Right>",    ":vertical resize -2<CR>",              { noremap = true } },
+    { "<C-p>",      builtin.find_files,                     { noremap = true } },
+    { "<leader>f",  builtin.live_grep,                      { noremap = true } },
+    { "<leader>s",  builtin.lsp_document_symbols,           { noremap = true } },
+    { "<C-j>",      ":cnext<CR>",                           {} },
+    { "<C-f>",      ":cprev<CR>",                           {} },
+    { "<leader>m",  vim.lsp.buf.rename,                     { noremap = true } },
+    { "<leader>ca", vim.lsp.buf.code_action,                { noremap = true } },
+    { "<leader>x",  ":make<CR>",                            { noremap = true } },
+    { "<leader>X",  ":make",                                { noremap = true } },
+    { "<leader>n",  ":UndotreeToggle<CR>",                  { noremap = true } },
+    { "<leader>gw", require("zemzale.custom").open_go_work, { noremap = true } },
 }
 
 local v_keybinds = {

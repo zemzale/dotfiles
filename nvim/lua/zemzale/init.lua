@@ -1,4 +1,5 @@
 require("zemzale.plugins")
+require("zemzale.custom")
 require("zemzale.telescope")
 require("zemzale.lsp")
 require("zemzale.keymaps")
