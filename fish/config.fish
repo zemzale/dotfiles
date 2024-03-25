@@ -7,14 +7,11 @@ if status is-interactive
     alias bat='bat --style=changes,header --theme=gruvbox-dark'
     alias cat='bat'
 
-
     alias ls='exa --group-directories-first'
     alias l "ls -la"
 
     export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{.git,node_modules}"'
-    source "/usr/local/opt/fzf/shell/key-bindings.fish"
-
-    export GPG_TTY=$(tty)
+    export GPG_TTY=(tty)
     export EDITOR=nvim
 
     starship init fish | source
@@ -46,5 +43,5 @@ if status is-interactive
 
     alias goread "goread --urls_path ~/.config/goread/urls.yml"
 
-    set --universal nvm_default_version v19.9.0
+    set --universal nvm_default_version v20.6.1
 end

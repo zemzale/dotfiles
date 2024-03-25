@@ -1,3 +1,4 @@
 local/bin/Godot
 local/bin/Teams
 nvim/plugin/packer_compiled.lua
+fish/conf.d/local.fish
