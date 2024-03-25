@@ -1,15 +1,17 @@
 #!/usr/bin/env fish
 
 function info
-    printf "[ ] %s\n" $argv
+    printf "\033[0;32m[ ] %s\033[0m\n" $argv
 end
-
+info "Stashing changes"
+git stash
 info "Switching to main branch"
 git switch main
 info "Pulling latest changes"
 git pull
 info "Cleaning up merged branches"
-git branch --merged | grep -v "\*" | grep -v main | xargs -n 1 git branch -d
+git branch --merged | grep -v "^\*" | grep -v "^main" | xargs -n 1 --no-run-if-empty git branch -d
 info "Cleaning up remote branches"
 git remote prune origin
-
+info "Poping changes"
+git stash pop

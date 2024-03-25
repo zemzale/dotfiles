@@ -1,3 +1,3 @@
 #!/usr/bin/env fish 
 
-ls | xargs -I % sh -c 'jq . % > tmp_% && mv tmp_% %'
+ls | grep '\.json' | xargs -I % sh -c 'jq . % > tmp_% && mv tmp_% %'
