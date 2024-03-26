@@ -1,0 +1,33 @@
+#!/usr/bin/env fish
+
+# Define the emulator command path
+set emulator ~/Android/Sdk/emulator/emulator
+
+# Define a function to launch the emulator with customizable arguments
+function launch_emulator
+    set avd_name $argv[1]
+    set args 
+
+    # Parse command-line arguments
+    for arg in $argv[2..-1]
+        switch $arg
+            case "--wipe"
+                set args $args "-wipe-data"
+            case *
+                # Handle any additional arguments here
+                set args $args $arg
+        end
+    end
+
+    # Launch emulator with specified arguments
+    $emulator -avd $avd_name $args > /dev/null 2>&1
+end
+
+# Get the list of AVDs and allow the user to select one using fzf
+set avd_name ($emulator -list-avds | fzf --prompt="Select AVD: ")
+
+if count $argv > 1
+    launch_emulator $avd_name $argv
+else
+    launch_emulator $avd_name
+end
