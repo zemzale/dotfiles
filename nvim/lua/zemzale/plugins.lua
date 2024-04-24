@@ -58,6 +58,13 @@ return require("packer").startup(function(use)
         },
     })
     use({
+        "ThePrimeagen/refactoring.nvim",
+        requires = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-treesitter/nvim-treesitter" }
+        }
+    })
+    use({
         "lewis6991/gitsigns.nvim",
         tag = "release",
         config = function()
