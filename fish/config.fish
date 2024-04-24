@@ -7,7 +7,7 @@ if status is-interactive
     alias bat='bat --style=changes,header --theme=tokyonight'
     alias cat='bat'
 
-    alias ls='exa --group-directories-first'
+    alias ls='eza --group-directories-first'
     alias l "ls -la"
 
     export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{.git,node_modules}"'

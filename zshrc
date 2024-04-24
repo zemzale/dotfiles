@@ -40,8 +40,8 @@ eval $(thefuck --alias)
 
 alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
 unalias l
-alias l='exa -la --group-directories-first'
-alias ls='exa --group-directories-first'
+alias l='eza -la --group-directories-first'
+alias ls='eza --group-directories-first'
 alias rmd='rm -rf'
 alias hlogs='lnav /var/log/httpd/error_log'
 alias bat='bat --style=changes,header --theme=gruvbox-dark'
