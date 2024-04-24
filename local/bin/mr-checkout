@@ -1,3 +1,10 @@
 #!/usr/bin/env fish
 
-glab mr list | fzf --layout reverse --preview 'glab mr view {1}' --preview-window down | awk '{print $1}' | xargs glab mr checkout
+set MR_ID $argv[1]
+
+if test -z $MR_ID
+    set MR_ID (glab mr list | fzf --layout reverse --preview 'glab mr view {1}' --preview-window down | awk '{print $1}')
+    exit 1
+end
+
+glab mr checkout $MR_ID

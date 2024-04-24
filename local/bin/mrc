@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+
+
+set target_branch (git config --get zemzale.release)
+
+if test -z $target_branch
+  set target_branch "main"
+end
+
+glab mr create -a=@me --remove-source-branch --push --target-branch $target_branch

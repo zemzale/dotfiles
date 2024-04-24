@@ -1,17 +1,19 @@
 #!/usr/bin/env fish
 
-function info
-    printf "\033[0;32m[ ] %s\033[0m\n" $argv
+set target_branch (git config --get zemzale.release)
+
+if test -z $target_branch
+  set target_branch "main"
 end
-info "Stashing changes"
-git stash
-info "Switching to main branch"
-git switch main
-info "Pulling latest changes"
-git pull
-info "Cleaning up merged branches"
-git branch --merged | grep -v "^\*" | grep -v "^main" | xargs -n 1 --no-run-if-empty git branch -d
-info "Cleaning up remote branches"
-git remote prune origin
-info "Poping changes"
-git stash pop
+
+gum spin --show-output --spinner meter --title "Stashing changes" -- git stash
+gum spin --show-output --spinner meter --title "Stashing changes" -- git stash
+gum spin --show-output --spinner meter --title "Switching to main branch" -- git switch $target_branch
+gum spin --show-output --spinner meter --title "Pulling latest changes" -- git pull
+gum spin --show-output --spinner meter --title "Cleaning up merged branches" -- git branch --merged | \
+    grep -v "^\*" | \
+    tr -d ' ' | \
+    grep -v --perl-regexp '^main$|^release\/.' | \
+    xargs -n 1 --no-run-if-empty git branch -d
+gum spin --show-output --spinner meter --title "Cleaning up remote branches" -- git remote prune origin
+gum spin --show-output --spinner meter --title "Poping changes" -- git stash pop
