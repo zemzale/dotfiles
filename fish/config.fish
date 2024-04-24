@@ -4,7 +4,7 @@ if status is-interactive
     fish_add_path /usr/local/go/bin $GOPATH/bin $HOME/.local/bin $HOME/.local/share/node/bin $HOME/Library/Python/3.11/bin $HOME/.cargo/bin
 
     alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
-    alias bat='bat --style=changes,header --theme=gruvbox-dark'
+    alias bat='bat --style=changes,header --theme=tokyonight'
     alias cat='bat'
 
     alias ls='exa --group-directories-first'
