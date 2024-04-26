@@ -1,0 +1,21 @@
+#!/usr/bin/env fish
+
+
+set go_version $argv[1]
+
+if test -z $go_version
+    echo "Usage: ./install_go.sh <go_version>"
+    exit 1
+end
+
+set go_tarball (string join "" "go" $go_version ".linux-amd64.tar.gz")
+
+gum spin --show-output --spinner globe --title "Downloading go version $go_version" -- curl -L -o /tmp/$go_tarball https://go.dev/dl/$go_tarball
+
+echo "Download complete"
+echo "Extracting go version $go_version"
+sudo tar -C /usr/local -xzf /tmp/$go_tarball
+gum spin --show-output --spinner monkey --title "Cleaning up" -- rm /tmp/$go_tarball
+
+go version
+echo "Go installed successfully"
