@@ -32,16 +32,20 @@ return require("packer").startup(function(use)
             -- Autocompletion
             { "hrsh7th/nvim-cmp" },     -- Required
             { "hrsh7th/cmp-nvim-lsp" }, -- Required
-            { "L3MON4D3/LuaSnip" },     -- Required
             { "hrsh7th/cmp-buffer" },
             { "hrsh7th/cmp-path" },
-            { "saadparwaiz1/cmp_luasnip" },
             { "hrsh7th/cmp-nvim-lsp" },
             { "hrsh7th/cmp-nvim-lua" },
 
             -- Formatting
             "nvimtools/none-ls.nvim"
         },
+    })
+    use({
+        "L3MON4D3/LuaSnip",
+        tag = "v2.3.0", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!:).
+        run = "make install_jsregexp",
     })
     use({
         "nvim-treesitter/nvim-treesitter",
@@ -83,5 +87,17 @@ return require("packer").startup(function(use)
     })
     use({
         "github/copilot.vim",
+    })
+
+    use({ "junegunn/goyo.vim" })
+
+    use({
+        "mfussenegger/nvim-dap",
+        requires = {
+            { "leoluz/nvim-dap-go" },
+            { "nvim-neotest/nvim-nio" },
+            { "rcarriga/nvim-dap-ui" },
+            { "theHamsta/nvim-dap-virtual-text" },
+        },
     })
 end)

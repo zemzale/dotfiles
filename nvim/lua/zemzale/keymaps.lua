@@ -12,11 +12,17 @@ M.vmap = function(tbl)
     vim.keymap.set("v", tbl[1], tbl[2], tbl[3])
 end
 
+M.smap = function(tbl)
+    vim.keymap.set("s", tbl[1], tbl[2], tbl[3])
+end
+
 vim.g.mapleader = " "
 local builtin = require("telescope.builtin")
 
 require("refactoring").setup()
 require("telescope").load_extension("refactoring")
+
+--- TDDO: Make the keybinds take mode as first arg
 
 local n_keybinds = {
     { "<leader>w",  ":write<CR>",                                                           { noremap = true } },
@@ -37,10 +43,29 @@ local n_keybinds = {
     { "<leader>n",  ":UndotreeToggle<CR>",                                                  { noremap = true } },
     { "<leader>gw", require("zemzale.custom").open_go_work,                                 { noremap = true } },
     { "<leader>rr", function() require("telescope").extensions.refactoring.refactors() end, { noremap = true } },
+    { "<C-l>p", function()
+        builtin.find_files({
+            cwd = './local-data/',
+            search_file = '*.fish',
+        })
+    end, { noremap = true } },
 }
 
 local v_keybinds = {
-    { "<leader>y", '"+y', { noremap = true } },
+    { "<leader>y",  '"+y',                                                                  { noremap = true } },
+    { "<leader>rr", function() require("telescope").extensions.refactoring.refactors() end, { noremap = true } },
+}
+
+local ls = require("luasnip")
+
+local i_keybinds = {
+    { "<C-k>", function() if ls.expand_or_jumpable() then ls.expand_or_jump() end end, { silent = true } },
+    { "<C-j>", function() if ls.jumpable(-1) then ls.jump(-1) end end,                 { silent = true } },
+}
+
+local s_keybinds = {
+    { "<C-k>", function() if ls.expand_or_jumpable() then ls.expand_or_jump() end end, { silent = true } },
+    { "<C-j>", function() if ls.jumpable(-1) then ls.jump(-1) end end,                 { silent = true } },
 }
 
 for _, m in ipairs(n_keybinds) do
@@ -49,6 +74,14 @@ end
 
 for _, m in ipairs(v_keybinds) do
     M.vmap(m)
+end
+
+for _, m in ipairs(i_keybinds) do
+    M.imap(m)
+end
+
+for _, m in ipairs(i_keybinds) do
+    M.smap(m)
 end
 
 local go_keybinds = {
