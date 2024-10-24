@@ -49,6 +49,7 @@ local n_keybinds = {
             search_file = '*.fish',
         })
     end, { noremap = true } },
+    { "<leader>c", "<CMD>Telescope commander<CR>", { noremap = true } },
 }
 
 local v_keybinds = {

@@ -102,4 +102,8 @@ return require("packer").startup(function(use)
             { "theHamsta/nvim-dap-virtual-text" },
         },
     })
+    use {
+        "FeiyouG/commander.nvim",
+        requires = { "nvim-telescope/telescope.nvim" }
+    }
 end)
