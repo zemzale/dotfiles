@@ -85,9 +85,12 @@ return require("packer").startup(function(use)
         "fatih/vim-go",
         config = function() end,
     })
-    use({
-        "github/copilot.vim",
-    })
+    use {
+        "supermaven-inc/supermaven-nvim",
+        config = function()
+            require("supermaven-nvim").setup({})
+        end,
+    }
 
     use({ "junegunn/goyo.vim" })
 
