@@ -1,0 +1,5 @@
+#!/usr/bin/env fish
+
+# bigdawg will show you the 10 biggest files/directories in your current directory
+
+du -hsx * | sort -rh | head -10

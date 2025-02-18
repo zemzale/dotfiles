@@ -1,10 +1,33 @@
 #!/usr/bin/env fish
 
+if test -z $ANTHROPIC_API_KEY
+    echo "You need to set the ANTHROPIC_API_KEY environment variable"
+    exit 1
+end
 
+# Get target branch from config or fallback to main
 set target_branch (git config --get zemzale.release)
 
 if test -z $target_branch
-  set target_branch "main"
+    set target_branch "main"
 end
 
-glab mr create -a=@me --remove-source-branch --push --target-branch $target_branch
+# Get current branch for source
+set source_branch (git branch --show-current)
+
+# Get the description
+git log -p $target_branch..$source_branch | mods -R "mr" -f "Create a MR description based on this git info. It should include a short summary of why the changes are made and what has been done." > description.md
+
+# Get a title with JIRA ID prefix
+git log -p $target_branch..$source_branch | mods -R "mr" -f "Create a short, concise MR title based on this git info under 70 characters long. IMPORTANT IT CANT BE LONGER THAN 70 CHARACTERS. IF IT'S LONGER I WILL DIE. Dont' include any sort of description. NO DESCRIPTION JUST THE TITLE OR I DIE. Start the title with jira ticket id, example [JIRA-ID]" > title.md
+
+nvim description.md 
+nvim title.md
+
+set DESCRIPTION (cat description.md)
+set TITLE (cat title.md)
+
+rm description.md title.md
+
+# Create the MR using both branches explicitly
+glab mr create -a=@me --remove-source-branch --push -t "$TITLE" -d "$DESCRIPTION" -s $source_branch -b $target_branch

@@ -12,4 +12,17 @@ M.open_go_work = function()
     })
 end
 
+M.open_todo = function()
+    scan.scan_dir(".", {
+        hidden = true,
+        add_dirs = false,
+        respect_gitignore = true,
+        depth = 1,
+        search_pattern = "TODO",
+        on_insert = function(entry)
+            vim.cmd('e ' .. entry)
+        end,
+    })
+end
+
 return M

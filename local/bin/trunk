@@ -7,7 +7,6 @@ if test -z $target_branch
 end
 
 gum spin --show-output --spinner meter --title "Stashing changes" -- git stash
-gum spin --show-output --spinner meter --title "Stashing changes" -- git stash
 gum spin --show-output --spinner meter --title "Switching to main branch" -- git switch $target_branch
 gum spin --show-output --spinner meter --title "Pulling latest changes" -- git pull
 gum spin --show-output --spinner meter --title "Cleaning up merged branches" -- git branch --merged | \

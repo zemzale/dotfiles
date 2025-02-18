@@ -29,11 +29,10 @@ cmp.setup({
     }),
     sources = {
         { name = "path" },
-        { name = "nvim_lsp",  keyword_length = 1 },
-        { name = "buffer",    keyword_length = 3 },
-        { name = "luasnip",   keyword_length = 2 },
+        { name = "nvim_lsp", keyword_length = 1 },
+        { name = "buffer",   keyword_length = 3 },
+        { name = "luasnip",  keyword_length = 2 },
         { name = "nvim_lua" },
-        { name = "supermaven" },
     },
     snippet = {
         expand = function(args)
