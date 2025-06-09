@@ -27,5 +27,6 @@ vim.o.signcolumn = "yes"
 vim.cmd [[set t_Co=256]]
 vim.cmd [[filetype plugin on]]
 vim.cmd [[filetype indent on]]
+vim.diagnostic.config({ virtual_lines = true })
 
 require("zemzale")

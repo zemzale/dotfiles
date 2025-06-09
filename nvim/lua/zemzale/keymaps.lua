@@ -21,44 +21,54 @@ vim.g.mapleader = " "
 local builtin = require("telescope.builtin")
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
-
+local custom = require("zemzale.custom")
+local neotest = require("neotest")
 
 local n_keybinds = {
-    { "<leader>w",  ":write<CR>",                           { noremap = true } },
-    { "<leader>q",  ":q!<CR>",                              { noremap = true } },
-    { "<Up>",       ":resize +2<CR>",                       { noremap = true } },
-    { "<Down>",     ":resize -2<CR>",                       { noremap = true } },
-    { "<Left>",     ":vertical resize +2<CR>",              { noremap = true } },
-    { "<Right>",    ":vertical resize -2<CR>",              { noremap = true } },
-    { "<C-p>",      builtin.find_files,                     { noremap = true } },
-    { "<leader>f",  builtin.live_grep,                      { noremap = true } },
-    { "<leader>s",  builtin.lsp_document_symbols,           { noremap = true } },
-    { "gr",         vim.lsp.buf.references,                 { noremap = true } },
-    { "<C-j>",      ":cnext<CR>",                           {} },
-    { "<C-f>",      ":cprev<CR>",                           {} },
-    { "<leader>m",  vim.lsp.buf.rename,                     { noremap = true } },
-    { "<leader>ca", vim.lsp.buf.code_action,                { noremap = true } },
-    { "<leader>x",  ":make<CR>",                            { noremap = true } },
-    { "<leader>X",  ":make",                                { noremap = true } },
-    { "<leader>n",  ":UndotreeToggle<CR>",                  { noremap = true } },
-    { "<leader>gw", require("zemzale.custom").open_go_work, { noremap = true } },
-    { "<leader>td", require("zemzale.custom").open_todo,    { noremap = true } },
+    { "<leader>w",  ":write<CR>",                 { noremap = true } },
+    { "<leader>q",  ":q!<CR>",                    { noremap = true } },
+    { "<Up>",       ":resize +2<CR>",             { noremap = true } },
+    { "<Down>",     ":resize -2<CR>",             { noremap = true } },
+    { "<Left>",     ":vertical resize +2<CR>",    { noremap = true } },
+    { "<Right>",    ":vertical resize -2<CR>",    { noremap = true } },
+    { "<C-p>",      builtin.find_files,           { noremap = true } },
+    { "<leader>f",  builtin.live_grep,            { noremap = true } },
+    { "<leader>s",  builtin.lsp_document_symbols, { noremap = true } },
+    { "gr",         vim.lsp.buf.references,       { noremap = true } },
+    { "<C-j>",      ":cnext<CR>",                 {} },
+    { "<C-f>",      ":cprev<CR>",                 {} },
+    { "<leader>m",  vim.lsp.buf.rename,           { noremap = true } },
+    { "<leader>ca", vim.lsp.buf.code_action,      { noremap = true } },
+    { "<leader>x",  ":make<CR>",                  { noremap = true } },
+    { "<leader>X",  ":make",                      { noremap = true } },
+    { "<leader>n",  ":UndotreeToggle<CR>",        { noremap = true } },
+    { "<leader>gw", custom.open_go_work,          { noremap = true } },
+    { "<leader>td", custom.open_todo,             { noremap = true } },
     { "<C-l>p", function()
         builtin.find_files({
             cwd = './local-data/',
             search_file = '*.fish',
         })
     end, { noremap = true } },
-    { "<leader>c",  "<CMD>Telescope commander<CR>", { noremap = true } },
-    { "gj",         "<cmd>diffget //2<CR>",         { noremap = true } },
-    { "gk",         "<cmd>diffget //3<CR>",         { noremap = true } },
-    { "<leader>1",  function() ui.nav_file(1) end,  { silent = true, noremap = true } },
-    { "<leader>2",  function() ui.nav_file(2) end,  { silent = true, noremap = true } },
-    { "<leader>3",  function() ui.nav_file(3) end,  { silent = true, noremap = true } },
-    { "<leader>4",  function() ui.nav_file(4) end,  { silent = true, noremap = true } },
-    { "<leader>5",  function() ui.nav_file(5) end,  { silent = true, noremap = true } },
-    { "<leader>h",  mark.add_file,                  { silent = true, noremap = true } },
-    { "<leader>hy", ui.toggle_quick_menu,           { silent = true, noremap = true } },
+    { "<leader>c",         "<CMD>Telescope commander<CR>",                       { noremap = true } },
+    { "gj",                "<cmd>diffget //2<CR>",                               { noremap = true } },
+    { "gk",                "<cmd>diffget //3<CR>",                               { noremap = true } },
+    { "<leader>1",         function() ui.nav_file(1) end,                        { silent = true, noremap = true } },
+    { "<leader>2",         function() ui.nav_file(2) end,                        { silent = true, noremap = true } },
+    { "<leader>3",         function() ui.nav_file(3) end,                        { silent = true, noremap = true } },
+    { "<leader>4",         function() ui.nav_file(4) end,                        { silent = true, noremap = true } },
+    { "<leader>5",         function() ui.nav_file(5) end,                        { silent = true, noremap = true } },
+    { "<leader>h",         mark.add_file,                                        { silent = true, noremap = true } },
+    { "<leader>hy",        ui.toggle_quick_menu,                                 { silent = true, noremap = true } },
+    { "<leader><leader>x", "<cmd>source %<CR>",                                  { silent = true, noremap = true } },
+    { "<leader>cs",        custom.switch_scheme,                                 { silent = true, noremap = true } },
+
+    { "<leader>gf",        neotest.run.run,                                      { silent = true, noremap = true } },
+    { "<leader>gt",        function() neotest.run.run(vim.fn.expand("%")) end,   { silent = true, noremap = true } },
+    { "<leader>gw",        neotest.watch.watch,                                  { silent = true, noremap = true } },
+    { "<leader>ts",        neotest.summary.toggle,                               { silent = true, noremap = true } },
+    { "<leader>to",        function() neotest.output.open({ enter = true }) end, { silent = true, noremap = true } },
+
 }
 
 local v_keybinds = {
@@ -95,8 +105,6 @@ end
 
 local go_keybinds = {
     { "<leader>gl", ":GoAlternate<CR>",  { noremap = true } },
-    { "<leader>gt", ":GoTest<CR>",       { noremap = true } },
-    { "<leader>gf", ":GoTestFunc<CR>",   { noremap = true } },
     { "<leader>gs", ":GoFillStruct<CR>", { noremap = true } },
 }
 

@@ -31,6 +31,7 @@ if status is-interactive
     alias ga "git add --patch"
     alias gf "git fetch --all"
     alias g "git"
+    alias gb "git branch"
 
     alias yeet "git add --patch && git commit --amend --no-edit && git push --force-with-lease"
 end 

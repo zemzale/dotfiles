@@ -3,3 +3,5 @@ local/bin/Teams
 nvim/plugin/packer_compiled.lua
 fish/conf.d/local.fish
 local/bin/AndroidStudio
+local/bin/
+fish/conf.d/work.fish
