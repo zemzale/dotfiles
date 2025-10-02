@@ -7,27 +7,61 @@ end
 
 # Get target branch from config or fallback to main
 set target_branch (git config --get zemzale.release)
-
-if test -z $target_branch
-    set target_branch "main"
+if test $status -ne 0
+    set target_branch "main" 
 end
 
 # Get current branch for source
 set source_branch (git branch --show-current)
+if test $status -ne 0
+    echo "Failed to get current branch"
+    exit 1
+end
 
-# Get the description
-git log -p $target_branch..$source_branch | mods -R "mr" -f "Create a MR description based on this git info. It should include a short summary of why the changes are made and what has been done." > description.md
+set PROMPT "Create an MR title and description based on the git information below. 
 
-# Get a title with JIRA ID prefix
-git log -p $target_branch..$source_branch | mods -R "mr" -f "Create a short, concise MR title based on this git info under 70 characters long. IMPORTANT IT CANT BE LONGER THAN 70 CHARACTERS. IF IT'S LONGER I WILL DIE. Dont' include any sort of description. NO DESCRIPTION JUST THE TITLE OR I DIE. Start the title with jira ticket id, example [JIRA-ID]" > title.md
+Format:
+[JIRA-ID] Brief action-oriented title (under 70 chars), no periods
 
-nvim description.md 
-nvim title.md
+## Why
+Explain the purpose and business value of these changes.
 
-set DESCRIPTION (cat description.md)
-set TITLE (cat title.md)
+## What
+Summarize the technical implementation details.
 
-rm description.md title.md
+## How to Test
+Include steps to verify the changes work correctly.
 
-# Create the MR using both branches explicitly
+## Notes
+Add any additional context, dependencies, or known issues.
+
+Use a professional tone, focus on clarity, and reference specific files/changes from the git info. If no JIRA ID is found, use [NO-TICKET].
+"
+
+# Generate both title and description in one prompt
+git log -p $target_branch..$source_branch | mods -R "mr" -f $PROMPT  > mr_content.md
+if test $status -ne 0
+    echo "Failed to generate content"
+    exit 1
+end 
+
+nvim mr_content.md
+
+# Extract title and description
+set TITLE (head -n 1 mr_content.md)
+if test $status -ne 0
+    echo "Failed to extract title"
+    exit 1
+end
+
+set DESCRIPTION (tail -n +3 mr_content.md | string collect)
+if test $status -ne 0
+    echo "Failed to extract description"
+    exit 1
+end
+
+rm mr_content.md
+
+# Create the MR
 glab mr create -a=@me --remove-source-branch --push -t "$TITLE" -d "$DESCRIPTION" -s $source_branch -b $target_branch
+

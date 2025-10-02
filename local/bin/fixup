@@ -1,7 +1,11 @@
 #!/usr/bin/env fish
 
+set target_branch (git config --get zemzale.release) 
+if test -z $target_branch
+    set target_branch main
+end
 
-set commit_sha (git log --oneline | fzf --layout reverse --preview 'git show {1}' | awk '{print $1}')
+set commit_sha (git log --oneline $target_branch..HEAD | fzf --layout reverse --preview 'git show {1}' | awk '{print $1}')
 set files (git status | grep "Changes not staged for commit")
 
 if test files != ""
