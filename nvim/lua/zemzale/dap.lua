@@ -1,7 +1,40 @@
 local dap = require "dap"
 local ui = require "dapui"
 
-require("dapui").setup()
+ui.setup({
+    layouts = {
+        {
+            -- Left sidebar: Scopes, Breakpoints, Stacks, and Watches
+            elements = {
+                { id = "breakpoints", size = 0.25 },
+                { id = "stacks",      size = 0.25 },
+                { id = "watches",     size = 0.25 },
+            },
+            size = 30,         -- Width of the sidebar
+            position = "left", -- Can be "left" or "right"
+        },
+        {
+            -- Bottom panel: Remove console and REPL, keep only the logs or other elements you want
+            elements = {
+                { id = "scopes", size = 1 }, -- Example: You can duplicate scopes here if needed
+            },
+            size = 10,                       -- Height of the bottom panel
+            position = "bottom",             -- Can be "bottom" or "top"
+        },
+    },
+    floating = {
+        max_height = 0.8,             -- Max height of floating windows
+        max_width = 0.8,              -- Max width of floating windows
+        border = "rounded",           -- Border style: "single", "double", "rounded", etc.
+        mappings = {
+            close = { "q", "<Esc>" }, -- Keybindings to close floating windows
+        },
+    },
+    windows = { indent = 1 },  -- Indentation for tree elements
+    render = {
+        max_type_length = nil, -- Can limit the length of variable types
+    },
+})
 
 vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
 vim.keymap.set("n", "<leader>gb", dap.run_to_cursor)

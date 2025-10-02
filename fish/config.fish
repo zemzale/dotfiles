@@ -1,7 +1,22 @@
 if status is-interactive
     fish_vi_key_bindings
-    export GOPATH=$HOME/go
-    fish_add_path /usr/local/go/bin $GOPATH/bin $HOME/.local/bin $HOME/.local/share/node/bin $HOME/Library/Python/3.11/bin $HOME/.cargo/bin $HOME/Android/Sdk/platform-tools $HOME/.local/opt/zig
+    set --global --export GOPATH $HOME/go
+    set --global --export PNPM_HOME "/home/azemzale/.local/share/pnpm"
+    set --global --export BUN_INSTALL "$HOME/.bun"
+
+    fish_add_path $BUN_INSTALL/bin 
+    fish_add_path /usr/local/go/bin 
+    fish_add_path $GOPATH/bin 
+    fish_add_path $HOME/.local/bin
+    fish_add_path $HOME/.local/share/node/bin
+    fish_add_path $HOME/Library/Python/3.11/bin
+    fish_add_path $HOME/.cargo/bin
+    fish_add_path $HOME/Android/Sdk/platform-tools
+    fish_add_path $HOME/.local/opt/zig
+    fish_add_path $HOME/.local/opt/odin
+    fish_add_path $HOME/.local/share/pnpm
+    fish_add_path $HOME/.local/opt/zen 
+    fish_add_path /home/azemzale/.opencode/bin
 
     alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
     alias bat='bat --style=changes,header --theme=tokyonight'
@@ -23,20 +38,12 @@ if status is-interactive
     alias dcl "docker compose logs -f"
 
     set --universal nvm_default_version v20.6.1
+
+    alias killport='function __killport; set -l p (lsof -t -i tcp:$argv[1]); test -n "$p"; and kill -9 $p; or echo "No process on TCP port $argv[1]"; end; __killport'
+
+
+
+    alias claude="/home/azemzale/.claude/local/claude"
 end
 
 
-# pnpm
-set -gx PNPM_HOME "/home/azemzale/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
-
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-alias claude="/home/azemzale/.claude/local/claude"
-
-# opencode
-fish_add_path /home/azemzale/.opencode/bin

@@ -1,6 +1,5 @@
 #!/usr/bin/env fish
 
-
 set go_version $argv[1]
 
 if test -z $go_version
