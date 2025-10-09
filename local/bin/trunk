@@ -46,7 +46,7 @@ end
 
 
 function change_trunk
-    set new_trunk $(git branch | grep -v "^\*" | fzf --layout reverse --preview 'git show --shortstat {1}' --preview-window down | awk '{print $1}')
+    set new_trunk $(git branch | fzf --layout reverse --preview 'git show --shortstat {1}' --preview-window down | awk '{print $1}')
 
     if test -z $new_trunk
         echo "No branch selected"

@@ -21,7 +21,7 @@ if status is-interactive
     alias gc! "git commit --amend"
     alias gc!! "git commit --amend --no-edit"
     alias gcf "git commit --fixup"
-    alias grb "git rebase --interactive --autostash --autosquash"
+    alias grb "git rebase --interactive --autostash --autosquash --rerere-autoupdate"
     alias grbc "git rebase --continue"
     alias grba "git rebase --abort"
     alias glo pretty_git_log
