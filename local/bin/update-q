@@ -1,0 +1,44 @@
+#!/usr/bin/env fish 
+
+set FILE_PATH "/tmp/amazon-q"
+set DOWNLOAD_URL "https://desktop-release.q.us-east-1.amazonaws.com/latest/amazon-q.deb"
+
+function cleanup
+    if test -f $FILE_PATH
+        rm $FILE_PATH
+        or begin
+            echo "Failed to delete $FILE_PATH"
+            exit 1
+        end
+        echo "Cleaned up $FILE_PATH"
+    end
+end
+
+trap cleanup EXIT
+
+cleanup
+
+
+echo "Downloading amazon q deb file"
+curl -fsSL -o $FILE_PATH $DOWNLOAD_URL
+or begin
+    echo "Download failed"
+    exit 1
+end
+
+echo "Installing"
+sudo dpkg -i $FILE_PATH 
+or begin
+    echo "Failed to run the dpkg command, exiting"
+    exit 2
+end
+
+sudo apt-get install -f
+or begin
+    echo "failed to run the apt-get install, exiting"
+    exit 2
+end
+
+echo "Install done"
+
+q version

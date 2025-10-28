@@ -1,0 +1,14 @@
+#!/usr/bin/env fish
+
+# Usage: notif <text> 
+# Sends a notificaion to the system and also plays a sound so you know something finished running
+
+set TEXT $argv[1]
+
+if test -z $TEXT
+    echo "I need some text for the notificaiton silly"
+    exit 1
+end
+
+notify-send -u critical -e $TEXT
+sound gong

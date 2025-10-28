@@ -1,0 +1,94 @@
+#!/usr/bin/env fish
+
+function run_cleanup
+    if test -f ~/.local/share/bang/script
+        rm ~/.local/share/bang/script
+    end
+end 
+
+function run_setup
+    if not test -d ~/.local/share/bang
+        mkdir -p ~/.local/share/bang
+    end
+end
+
+function run_list
+    ls -1 ~/.local/share/bang
+    exit
+end
+
+function run_script
+    set sctipt $argv[2]
+    if test -n script
+        set script (ls -1 ~/.local/share/bang | gum filter)
+    end
+
+    bash ~/.local/share/bang/$script
+
+    echo ~/.local/share/bang/$script > ~/.local/share/bang/last_run
+    exit
+end
+
+function run_edit
+    set script (ls -1 ~/.local/share/bang | gum filter)
+    nvim ~/.local/share/bang/$script
+    exit
+end
+
+function save_script
+    set script_name (gum input --placeholder="> ")
+    set script_path ~/.local/share/bang/$script_name
+    if test -f $script_path
+        gum confirm "The script $script_name already exists. Overwrite?" && rm $script_path
+    end
+    mv ~/.local/share/bang/script $script_path
+end
+
+function run_new
+
+    touch ~/.local/share/bang/script
+    nvim ~/.local/share/bang/script
+    bash ~/.local/share/bang/script
+
+
+    gum confirm "Do you want to save the script?" && save_script
+end
+
+function run_again
+    run_script (cat ~/.local/share/bang/last_run)
+end
+
+
+function main
+    run_setup
+    run_cleanup
+
+    if test -z $argv[1]
+        run_new
+        exit
+    end
+
+    if test $argv[1] = "run"
+        run_script $argv
+        exit
+    end
+
+    if test $argv[1] = "list"
+        run_list
+        exit
+    end
+        
+    if test $argv[1] = "edit"
+        run_edit
+        exit
+    end
+
+    if test $argv[1] = "again"
+        run_again
+        exit
+    end
+
+    run_new
+end
+
+main $argv

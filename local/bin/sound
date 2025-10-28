@@ -1,0 +1,13 @@
+#!/usr/bin/env fish
+
+# Usage: sound <sound>
+# Plays a sound from `.config/sfx/<sound>` 
+
+set sound $argv[1]
+
+if test -z $sound
+    echo "no sound given"
+    exit 1
+end 
+
+mpv --really-quiet --no-video "$HOME/.config/sfx/$sound.mp4"

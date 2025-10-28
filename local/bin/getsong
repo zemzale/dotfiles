@@ -1,0 +1,13 @@
+#!/usr/bin/env fish
+
+# Usage: getsong <youtube-url>
+# Downloads the sound from youtube-url at best quality
+
+set URL $argv[1]
+
+if test -z $URL
+    echo "I need a url"
+    exit 1
+end
+
+yt-dlp -f bestaudio -o '%(title)s.%(ext)s' $URL 

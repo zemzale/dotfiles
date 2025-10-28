@@ -1,0 +1,7 @@
+#!/usr/bin/env fish
+
+curl -L -o /tmp/discord.deb "https://discord.com/api/download/stable?platform=linux&format=deb"
+
+sudo apt install -y /tmp/discord.deb
+
+rm /tmp/discord.deb

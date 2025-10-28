@@ -1,0 +1,77 @@
+#!/usr/bin/env fish
+
+# config_edit.fish - Quickly jump to editing common tool configs
+
+# Define a map of config names and their paths
+
+function config_edit
+    set -l config_map
+    set -a config_map "fish" "$HOME/.config/fish/config.fish"
+    set -a config_map "nvim" "$HOME/.config/nvim/init.lua"
+    set -a config_map "git" "$HOME/.gitconfig"
+    set -a config_map "tmux" "$HOME/.config/tmux/tmux.conf"
+    set -a config_map "ssh" "$HOME/.ssh/config"
+    set -a config_map "mods" "$HOME/.config/mods"
+    set -a config_map "ghosty" "$HOME/.config/ghostty/"
+    set -a config_map "opencode" "$HOME/.config/opencode/"
+
+    # If no arguments provided, show available configs
+    if test (count $argv) -eq 0
+        echo "Usage: config_edit [config_name]"
+        echo "Available configs:"
+        
+        for i in (seq 1 2 (count $config_map))
+            set -l name $config_map[$i]
+            set -l path $config_map[(math $i + 1)]
+            echo "  $name -> $path"
+        end
+        return 0
+    end
+    
+    set -l config_name $argv[1]
+    set -l found 0
+    set -l config_path ""
+    
+    # Find the requested config in the map
+    for i in (seq 1 2 (count $config_map))
+        if test "$config_map[$i]" = "$config_name"
+            set found 1
+            set config_path $config_map[(math $i + 1)]
+            break
+        end
+    end
+    
+    if test $found -eq 0
+        echo "Config '$config_name' not found."
+        return 1
+    end
+    
+    # Check if the config file exists
+    if not test -e $config_path
+        # If directory doesn't exist, create it
+        set -l dir (dirname $config_path)
+        if not test -d $dir
+            mkdir -p $dir
+            echo "Created directory: $dir"
+        end
+        
+        echo "Config file doesn't exist. Creating an empty file."
+        touch $config_path
+    end
+
+    cd (dirname $config_path)
+    
+    # Open the config file with nvim
+    nvim $config_path
+
+    cd -
+end
+
+# If this script is sourced, define the function
+# If it's executed directly, run the function with provided arguments
+if status is-interactive
+    # Just define the function when sourced
+else
+    config_edit $argv
+end
+

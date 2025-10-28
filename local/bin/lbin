@@ -1,0 +1,26 @@
+#!/usr/bin/env fish
+
+# Usage: Create a new script in local bin and make it exacutable after editing
+
+set script_name $argv[1]
+
+if test -z $script_name
+    echo "I NEED THE SCRIPT NAME"
+    exit 1
+end
+
+if test -f $script_name
+    echo "THIS ALREADY EXIST YOU MORON"
+    exit 2
+end
+
+cd ~/.local/bin
+
+begin
+    echo "#!/usr/bin/env fish"
+    echo ""
+    echo "# Usage: " 
+end > $script_name
+
+nvim $script_name
+chmod +x $script_name

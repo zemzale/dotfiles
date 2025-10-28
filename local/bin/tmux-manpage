@@ -1,3 +1,0 @@
-#!/usr/bin/env fish
-
-tmux new-window -n "MANPAGE" man $1
