@@ -18,9 +18,17 @@ if test $status -ne 0
     exit 1
 end
 
-set PROMPT "Create an MR title and description based on the git information below. 
+set PROMPT "
+# Rules
 
-Format:
+- Be extremely concise, sacrifice grammar for the sake of concision
+- Use a professional tone, If no JIRA ID is found, use just skip it.
+
+# Task
+
+Create an MR title and description based on the git information below. 
+
+# Format:
 [JIRA-ID] Brief action-oriented title (under 70 chars), no periods
 
 ## Why
@@ -34,8 +42,6 @@ Include steps to verify the changes work correctly.
 
 ## Notes
 Add any additional context, dependencies, or known issues.
-
-Use a professional tone, focus on clarity, and reference specific files/changes from the git info. If no JIRA ID is found, use [NO-TICKET].
 "
 
 # Generate both title and description in one prompt
