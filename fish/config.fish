@@ -37,7 +37,7 @@ if status is-interactive
     alias dcu "docker compose up -d"
     alias dcl "docker compose logs -f"
 
-    set --universal nvm_default_version v20.6.1
+    set --universal nvm_default_version v24.7.0
 
     alias killport='function __killport; set -l p (lsof -t -i tcp:$argv[1]); test -n "$p"; and kill -9 $p; or echo "No process on TCP port $argv[1]"; end; __killport'
 

@@ -36,7 +36,7 @@ local n_keybinds = {
 	{ "<Right>", ":vertical resize -2<CR>", { noremap = true } },
 
 	-- Navigation
-	{ "<C-p>", builtin.find_files, { noremap = true } },
+	---	{ "<C-p>", builtin.find_files, { noremap = true } },
 	{ "<leader>f", builtin.live_grep, { noremap = true } },
 	{ "<leader><leader>f", builtin.current_buffer_fuzzy_find, { noremap = true } },
 	{ "<C-j>", ":cnext<CR>", {} },

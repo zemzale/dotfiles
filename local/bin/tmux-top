@@ -1,0 +1,11 @@
+#!/usr/bin/env fish
+
+if command -v btop &>/dev/null
+    set command btop
+else if command -v htop &>/dev/null
+    set command htop
+else 
+    set command top
+end
+
+tmux new-window -n 'top' $command
