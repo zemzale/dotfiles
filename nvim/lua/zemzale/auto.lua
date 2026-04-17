@@ -10,10 +10,15 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 local format_group = vim.api.nvim_create_augroup("zemzale.format", { clear = true })
-vim.api.nvim_create_autocmd("BufWrite", {
+vim.api.nvim_create_autocmd("BufWritePre", {
     group = format_group,
     pattern = { "*" },
-    callback = function()
+    callback = function(args)
+        local has_formatter = vim.lsp.get_clients({ bufnr = args.buf, method = "textDocument/formatting" })[1] ~= nil
+        if not has_formatter then
+            return
+        end
+
         vim.lsp.buf.format({ sync = true, timeout = 2000 })
     end,
 })

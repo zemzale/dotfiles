@@ -47,3 +47,4 @@ if status is-interactive
 end
 
 
+/home/azemzale/.local/bin/mise activate fish | source

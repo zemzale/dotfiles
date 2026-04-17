@@ -37,5 +37,8 @@ require("lazy").setup({
 require("zemzale.keymaps")
 require("zemzale.custom")
 require("zemzale.auto")
+require("zemzale.autocomplete")
 
 require("zemzale.autoload").setup()
+
+require("vim._core.ui2").enable()

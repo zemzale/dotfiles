@@ -24,6 +24,14 @@ local ui = require("harpoon.ui")
 local custom = require("zemzale.custom")
 local neotest = require("neotest")
 
+local diagnostic_next = function()
+	vim.diagnostic.jump({ count = 1 })
+end
+
+local diagnostic_prev = function()
+	vim.diagnostic.jump({ count = -1 })
+end
+
 local n_keybinds = {
 	-- Write stuff
 	{ "<leader>w", ":write<CR>", { noremap = true } },
@@ -36,7 +44,7 @@ local n_keybinds = {
 	{ "<Right>", ":vertical resize -2<CR>", { noremap = true } },
 
 	-- Navigation
-	---	{ "<C-p>", builtin.find_files, { noremap = true } },
+	--{ "<C-p>", builtin.find_files, { noremap = true } },
 	{ "<leader>f", builtin.live_grep, { noremap = true } },
 	{ "<leader><leader>f", builtin.current_buffer_fuzzy_find, { noremap = true } },
 	{ "<C-j>", ":cnext<CR>", {} },
@@ -102,6 +110,8 @@ local n_keybinds = {
 	{ "<leader>ca", vim.lsp.buf.code_action, { noremap = true } },
 	{ "gd", vim.lsp.buf.definition, { noremap = true } },
 	{ "gi", vim.lsp.buf.implementation, { noremap = true } },
+	--{ "<leader>j", diagnostic_next, { noremap = true } },
+	--{ "<leader>f", diagnostic_prev, { noremap = true } },
 
 	-- Neotest
 	{ "<leader>tf", neotest.run.run, { silent = true, noremap = true } },
@@ -132,6 +142,8 @@ local n_keybinds = {
 
 local v_keybinds = {
 	{ "<leader>y", '"+y', { noremap = true } },
+	{ "<leader>j", ":diffget //2<CR>", { noremap = true } },
+	{ "<leader>k", ":diffget //3<CR>", { noremap = true } },
 }
 
 local ls = require("luasnip")

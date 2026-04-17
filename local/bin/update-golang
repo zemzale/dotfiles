@@ -12,6 +12,10 @@ set go_tarball (string join "" "go" $go_version ".linux-amd64.tar.gz")
 gum spin --show-output --spinner globe --title "Downloading go version $go_version" -- curl -L -o /tmp/$go_tarball https://go.dev/dl/$go_tarball
 
 echo "Download complete"
+
+echo "Removing old go version"
+sudo rm -rf /usr/local/go
+
 echo "Extracting go version $go_version"
 sudo tar -C /usr/local -xzf /tmp/$go_tarball
 gum spin --show-output --spinner monkey --title "Cleaning up" -- rm /tmp/$go_tarball
