@@ -1,0 +1,7 @@
+#!/usr/bin/env fish
+
+
+# Create tailscale folder in downloads if it doesn't exist
+
+mkdir -p ~/Downloads/tailscale
+ tailscale file get ~/Downloads/tailscale/

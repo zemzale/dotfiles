@@ -1,0 +1,24 @@
+#!/bin/bash
+
+cols=$(tput cols)
+path_width=$((cols - 10))
+
+echo "TOP 5 PROCESSES BY MEMORY"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+ps aux --sort=-%mem | head -6 | tail -5 | awk '{print $2, $11}' | while read pid cmd; do
+  cwd=$(readlink /proc/$pid/cwd 2>/dev/null || echo "N/A")
+  mem=$(ps -p $pid -o rss=)
+  mem_mb=$((mem / 1024))
+  
+  # Truncate path if needed
+  if [ ${#cwd} -gt $path_width ]; then
+    cwd="...${cwd: -$((path_width - 3))}"
+  fi
+  
+  name=$(basename "$cmd")
+  
+  printf "\n%-25s\n  Dir:  %s\n  Mem:  %'d MB\n" "$name" "$cwd" "$mem_mb"
+done
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
