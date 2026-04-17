@@ -95,7 +95,6 @@ local n_keybinds = {
 
 	-- Misc
 	{ "<leader>gw", custom.open_go_work, { noremap = true } },
-	{ "<leader>td", custom.open_todo, { noremap = true } },
 	{ "<leader><leader>x", "<cmd>source %<CR>", { silent = true, noremap = true } },
 	{ "<leader>cs", custom.switch_scheme, { silent = true, noremap = true } },
 
