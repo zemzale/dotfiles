@@ -7,9 +7,6 @@ return {
 		{ "hrsh7th/cmp-path" },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/cmp-nvim-lua" },
-
-		-- Formatting
-		"nvimtools/none-ls.nvim",
 	},
 	enabled = false,
 	config = function()
@@ -33,14 +30,6 @@ return {
 				expand = function(args)
 					ls.lsp_expand(args.body)
 				end,
-			},
-		})
-		local null_ls = require("null-ls")
-		-- List of sources available here https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
-		null_ls.setup({
-			sources = {
-				null_ls.builtins.formatting.gofumpt,
-				null_ls.builtins.formatting.goimports,
 			},
 		})
 	end,

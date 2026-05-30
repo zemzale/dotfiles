@@ -1,24 +1,70 @@
 #!/bin/bash
 
-cols=$(tput cols)
-path_width=$((cols - 10))
+cols=$(tput cols 2>/dev/null)
+if ! [[ "$cols" =~ ^[0-9]+$ ]]; then
+  cols=80
+fi
 
-echo "TOP 5 PROCESSES BY MEMORY"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+if [ "$cols" -lt 72 ]; then
+  cols=72
+fi
 
-ps aux --sort=-%mem | head -6 | tail -5 | awk '{print $2, $11}' | while read pid cmd; do
-  cwd=$(readlink /proc/$pid/cwd 2>/dev/null || echo "N/A")
-  mem=$(ps -p $pid -o rss=)
-  mem_mb=$((mem / 1024))
-  
-  # Truncate path if needed
-  if [ ${#cwd} -gt $path_width ]; then
-    cwd="...${cwd: -$((path_width - 3))}"
+declare -a pids names mem_mbs cwds
+
+while read -r pid rss comm; do
+  [ -z "$pid" ] && continue
+
+  pids+=("$pid")
+  names+=("$(basename "$comm")")
+  mem_mbs+=("$((rss / 1024))")
+  cwds+=("$(readlink "/proc/$pid/cwd" 2>/dev/null || printf "N/A")")
+done < <(ps -eo pid=,rss=,comm= --sort=-rss | head -5)
+
+if [ "${#pids[@]}" -eq 0 ]; then
+  printf "No process data available.\n"
+  exit 1
+fi
+
+truncate_text() {
+  local text="$1"
+  local width="$2"
+
+  if [ "$width" -le 3 ]; then
+    printf "%s" "${text:0:width}"
+    return
   fi
-  
-  name=$(basename "$cmd")
-  
-  printf "\n%-25s\n  Dir:  %s\n  Mem:  %'d MB\n" "$name" "$cwd" "$mem_mb"
-done
 
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  if [ "${#text}" -gt "$width" ]; then
+    printf "...%s" "${text: -$((width - 3))}"
+  else
+    printf "%s" "$text"
+  fi
+}
+
+divider() {
+  printf '%*s\n' "$cols" '' | tr ' ' '-'
+}
+
+render_option_1() {
+  local name_width=18
+  local dir_width=$((cols - 42))
+  local i dir
+
+  if [ "$dir_width" -lt 20 ]; then
+    dir_width=20
+  fi
+
+  printf "TOP 5 PROCESSES BY MEMORY\n"
+  divider
+  printf "%-7s %-18s %8s  %s\n" "PID" "PROCESS" "MEM MB" "WORKING DIR"
+  divider
+
+  for i in "${!pids[@]}"; do
+    dir=$(truncate_text "${cwds[$i]}" "$dir_width")
+    printf "%-7s %-18.18s %8s  %s\n" \
+      "${pids[$i]}" "${names[$i]}" "${mem_mbs[$i]}" "$dir"
+  done
+
+  divider
+}
+render_option_1
